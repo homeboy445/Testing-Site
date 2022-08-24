@@ -9,7 +9,6 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Poppins"
     />
-    <script src="https://dev.visualwebsiteoptimizer.com/lib/628404.js" type="text/javascript"></script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript">
       const page_url = window.location.href;
@@ -20,7 +19,6 @@
         .map((i) => i.split("="))
         .map((param) => (queryParams[param[0]] = param[1]));
       if (queryParams["mode"] === "osc") {
-        if (queryParams['accountId'] == 628404) return;
         var script = document.createElement("script");
         script.src = `https://dev.visualwebsiteoptimizer.com/lib/${
           queryParams["accountId"] || 4000166
