@@ -211,7 +211,7 @@
       <div class="w3-container" style="margin-top: 80px" id="showcase">
         <h1 class="w3-jumbo"><b>Interior Design</b></h1>
         <h1 class="w3-xxxlarge w3-text-red"><b>Showcase.</b></h1>
-        <a href="/Testing-Site/testing.html">To-Testing-Site</a>
+        <button id="redirect">To-Testing-Site</button>
         <hr style="width: 50px; border: 5px solid red" class="w3-round" />
       </div>
 
@@ -425,7 +425,7 @@
           Do you want us to style your home? Fill out the form and fill me in
           with the details :) We love meeting new people!
         </p>
-        <form action="#" target="">
+        <form action="/testing.html" target="">
           <div class="w3-section">
             <label>Name</label>
             <input
@@ -504,6 +504,13 @@
       window.VWO = window.VWO || [];
       // Replace TAG_VALUE with your actual tag value
       window.VWO.push(['tag', '1', 'TAG_VALUE', 'user']);
+    </script>
+    <script>
+      const button = document.getElementById('redirect');
+      button.onclick = () => {
+        const url = window.location.href;
+        window.location.href = url.replace("index.html", "testing.html");
+      }
     </script>
   </body>
 </html>
