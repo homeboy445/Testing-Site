@@ -26,6 +26,17 @@
         .split("&")
         .map((i) => i.split("="))
         .map((param) => (queryParams[param[0]] = param[1]));
+      if (queryParams["eventsListener"]) {
+        document.addEventListener("pointerdown", (e) => {
+          console.log("pointerdown ", e.target, ' ', e.clientX, ' ', e.clientY);
+        });
+        document.addEventListener("pointerup", (e) => {
+          console.log("pointerup ", e.target, ' ', e.clientX, ' ', e.clientY);
+        });
+        document.addEventListener("pointercancel", (e) => {
+          console.log("pointercancel");
+        });
+      }
       if (queryParams["mode"] === "osc") {
         var script = document.createElement("script");
         script.src = `https://dev.visualwebsiteoptimizer.com/lib/${
