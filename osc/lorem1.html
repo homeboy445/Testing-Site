@@ -192,11 +192,6 @@
       <h1 class="w3-margin w3-xlarge">Quote of the day: Have fun!</h1>
     </div>
 
-    <div id="console">
-      <button id="clear">clear</button>
-      dfv
-    </div>
-
     <!-- Footer -->
     <footer class="w3-container w3-padding-64 w3-center w3-opacity">
       <div class="w3-xlarge w3-padding-32">
@@ -224,26 +219,6 @@
         } else {
           x.className = x.className.replace(" w3-show", "");
         }
-      }
-      if (queryParams["eventsListener"] && queryParams["console"]) {
-        function log(data) {
-        const ele = document.getElementById('console');
-        if (!ele) return;
-        const p = document.createElement('p');
-        p.innerText = data;
-        ele.appendChild(p);
-      }
-        document.addEventListener("pointerdown", (e) => {
-          log("pointerdown " + ' ' + e.clientX + ' ' + e.clientY);
-        });
-        document.addEventListener("pointerup", (e) => {
-          log("pointerup " + ' ' + e.clientX + ' ' + e.clientY);
-        });
-        document.addEventListener("pointercancel", (e) => {
-          log("pointercancel");
-        });
-      } else {
-        document.querySelector('#console').remove();
       }
     </script>
   </body>
