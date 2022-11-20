@@ -17,26 +17,40 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <style>
+      #console {
+        width: 400px;
+        height: 400px;
+        position: fixed;
+        border: 2px solid black;
+        top: 50%;
+        right: 35%;
+        background: white;
+        overflow: scroll;
+      }
+      #console > button {
+        align-self: center;
+      }
+      @media only screen and (max-width: 500px) {
+        #console {
+          top: 60%;
+          right: 20%;
+          width: 300px;
+          height: 300px;
+        }
+      }
+    </style>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript">
       const page_url = window.location.href;
       const queryParams = {};
+      window.personalUtil = {};
       page_url
         .substring(page_url.lastIndexOf("?") + 1)
         .split("&")
         .map((i) => i.split("="))
         .map((param) => (queryParams[param[0]] = param[1]));
-      if (queryParams["eventsListener"]) {
-        document.addEventListener("pointerdown", (e) => {
-          console.log("pointerdown ", e.target, ' ', e.clientX, ' ', e.clientY);
-        });
-        document.addEventListener("pointerup", (e) => {
-          console.log("pointerup ", e.target, ' ', e.clientX, ' ', e.clientY);
-        });
-        document.addEventListener("pointercancel", (e) => {
-          console.log("pointercancel");
-        });
-      }
+      window.personalUtil.queryParams = queryParams;
       if (queryParams["mode"] === "osc") {
         var script = document.createElement("script");
         script.src = `https://dev.visualwebsiteoptimizer.com/lib/${
@@ -300,6 +314,10 @@
       </p>
     </footer>
 
+    <div id="console">
+      <button id="console-clear">clear</button>
+    </div>
+
     <script>
       // Used to toggle the menu on small screens when clicking on the menu button
       function myFunction() {
@@ -309,6 +327,38 @@
         } else {
           x.className = x.className.replace(" w3-show", "");
         }
+      }
+      const consoleLogger = document.getElementById('console');
+      window.personalUtil.logs = [];
+      const log = (data) => {
+        if (!consoleLogger) {
+          return console.log(data);
+        }
+        const p = document.createElement('p');
+        p.innerText = data;
+        p.id = Date.now();
+        window.personalUtil.logs.push(p.id);
+        consoleLogger.appendChild(p);
+      }
+      document.getElementById('console-clear').addEventListener('mousedown', (e) => {
+        window.personalUtil.logs.forEach((id) => document.getElementById(id).remove());
+        window.personalUtil.logs = [];
+      });
+      document.querySelector("body > header > button").addEventListener("pointerdown", (e) => {
+          log("pointerdown x:" + Math.floor(e.clientX) + ', y:' + Math.floor(e.clientY));
+      });
+      document.querySelector("body > header > button").addEventListener("pointerup", (e) => {
+        log("pointerup x:" + Math.floor(e.clientX) + ', y:' + Math.floor(e.clientY));
+      });
+      document.querySelector("body > header > button").addEventListener("pointercancel", (e) => {
+        log("pointercancel");
+      });
+      if (!window.personalUtil.queryParams["logger"]) {
+        consoleLogger.style.visibility = "hidden";
+        consoleLogger.style.pointerEvents = "none";
+      } else {
+        consoleLogger.style.visibility = "visible";
+        consoleLogger.style.pointerEvents = "all";
       }
     </script>
   </body>
