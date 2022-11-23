@@ -314,9 +314,6 @@
       </p>
     </footer>
 
-    <div id="console">
-      <button id="console-clear">clear</button>
-    </div>
 
     <script>
       // Used to toggle the menu on small screens when clicking on the menu button
@@ -340,12 +337,8 @@
         window.personalUtil.logs.push(p.id);
         consoleLogger.appendChild(p);
       }
-      document.getElementById('console-clear').addEventListener('mousedown', (e) => {
-        window.personalUtil.logs.forEach((id) => document.getElementById(id).remove());
-        window.personalUtil.logs = [];
-      });
       document.querySelector("body > header > button").addEventListener("pointerdown", (e) => {
-          log("pointerdown x:" + Math.floor(e.clientX) + ', y:' + Math.floor(e.clientY));
+        log("pointerdown x:" + Math.floor(e.clientX) + ', y:' + Math.floor(e.clientY));
       });
       document.querySelector("body > header > button").addEventListener("pointerup", (e) => {
         log("pointerup x:" + Math.floor(e.clientX) + ', y:' + Math.floor(e.clientY));
