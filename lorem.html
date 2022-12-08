@@ -28,7 +28,15 @@
         .map((i) => i.split("="))
         .map((param) => (queryParams[param[0]] = param[1]));
       window.personalUtil.queryParams = queryParams;
-      if (queryParams["mode"] === "osc") {
+      if (queryParams["userAgent"]) {
+        const textArea = document.createElement('textarea');
+        textArea.value = window.navigator.userAgent;
+        textArea.style.width = "400px";
+        textArea.style.height = "400px";
+        setTimeout(() => {
+          window.document.body.appendChild(textArea);
+        }, 1000);
+      } else if (queryParams["mode"] === "osc") {
         var script = document.createElement("script");
         script.src = `https://dev.visualwebsiteoptimizer.com/lib/${
           queryParams["accountId"] || 4000166
