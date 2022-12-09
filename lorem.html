@@ -318,7 +318,7 @@
         textArea.style.position = "fixed";
         textArea.style.top = "60%";
         const log = (value) => {
-          textArea.value = textArea.value + '\n' + value;
+          textArea.value = textArea.value + ' - ' + value;
         }
         log(JSON.stringify(window.chrome));
         document.querySelector("body > header > button").addEventListener("pointerdown", () => log("pointerdown"));
