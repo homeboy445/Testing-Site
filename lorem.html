@@ -310,6 +310,22 @@
           x.className = x.className.replace(" w3-show", "");
         }
       }
+      if (window.location.href.includes("?debugger=true")) {
+        const textArea = document.createElement('textarea');
+        textArea.style.height = "400px";
+        textArea.style.width = "400px";
+        textArea.style.overflow = "scroll";
+        textArea.style.position = "fixed";
+        textArea.style.top = "60%";
+        const log = (value) => {
+          textArea.value = textArea.value + '\n' + value;
+        }
+        log(JSON.stringify(window.chrome));
+        document.querySelector("body > header > button").addEventListener("pointerdown", () => log("pointerdown"));
+        document.querySelector("body > header > button").addEventListener("pointerup", () => log("pointerup"));
+        document.querySelector("body > header > button").addEventListener("pointermove", () => log("pointermove"));
+        document.body.appendChild(textArea);
+      }
     </script>
   </body>
 </html>
