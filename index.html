@@ -4,6 +4,10 @@
     <title>Interior Design Site</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src https://*; child-src 'none';"
+    />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link
       rel="stylesheet"
@@ -212,7 +216,9 @@
         <h1 class="w3-jumbo"><b>Interior Design</b></h1>
         <h1 class="w3-xxxlarge w3-text-red"><b>Showcase.</b></h1>
         <button id="redirect">To-Testing-Site</button>
-        <button onclick="history.pushState(null, 'test', 'testing.html')">SPA push</button>
+        <button onclick="history.pushState(null, 'test', 'testing.html')">
+          SPA push
+        </button>
         <hr style="width: 50px; border: 5px solid red" class="w3-round" />
       </div>
 
@@ -429,27 +435,15 @@
         <form action="/testing.html" target="">
           <div class="w3-section">
             <label>Name</label>
-            <input
-              class="w3-input w3-border"
-              type="text"
-              name="Name"
-            />
+            <input class="w3-input w3-border" type="text" name="Name" />
           </div>
           <div class="w3-section">
             <label>Email</label>
-            <input
-              class="w3-input w3-border"
-              type="text"
-              name="Email"
-            />
+            <input class="w3-input w3-border" type="text" name="Email" />
           </div>
           <div class="w3-section">
             <label>Message</label>
-            <input
-              class="w3-input w3-border"
-              type="text"
-              name="Message"
-            />
+            <input class="w3-input w3-border" type="text" name="Message" />
           </div>
           <button
             type="submit"
@@ -504,14 +498,14 @@
     <script>
       window.VWO = window.VWO || [];
       // Replace TAG_VALUE with your actual tag value
-      window.VWO.push(['tag', '1', 'TAG_VALUE', 'user']);
+      window.VWO.push(["tag", "1", "TAG_VALUE", "user"]);
     </script>
     <script>
-      const button = document.getElementById('redirect');
+      const button = document.getElementById("redirect");
       button.onclick = () => {
         const url = window.location.href;
         window.location.href = url.replace("index.html", "testing.html");
-      }
+      };
     </script>
   </body>
 </html>
