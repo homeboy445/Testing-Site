@@ -61,3 +61,12 @@ window._vwo_code =
     window._vwo_settings_timer = code.init();
     return code;
   })();
+
+const script = document.createElement('script');
+script.async = true;
+script.referrerPolicy = "no-referrer-when-downgrade";
+script.src = "https://dev.visualwebsiteoptimizer.com/j.php?a=4000166&f=1";
+script.onerror = () => {
+  window._vwo_code.finish();
+};
+document.head.appendChild(script);
