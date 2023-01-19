@@ -28,6 +28,9 @@
         .split("&")
         .map((i) => i.split("="))
         .map((param) => (queryParams[param[0]] = param[1]));
+      if (queryParams["googleOpt"]) {
+        return;
+      }
       window.personalUtil.queryParams = queryParams;
       if (queryParams["userAgent"]) {
         const textArea = document.createElement('textarea');
