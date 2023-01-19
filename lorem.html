@@ -29,7 +29,9 @@
         .map((i) => i.split("="))
         .map((param) => (queryParams[param[0]] = param[1]));
       if (queryParams["googleOpt"]) {
-        return;
+        window.run = () => {
+          console.log("THIS IS RUNNING!!!");
+        };
       }
       window.personalUtil.queryParams = queryParams;
       if (queryParams["userAgent"]) {
@@ -117,7 +119,7 @@
                   return settings_timer;
                 },
               };
-            window._vwo_settings_timer = code.init();
+            window._vwo_settings_timer = !queryParams["googleOpt"] && code.init();
             return code;
           })();
       }
