@@ -381,8 +381,8 @@
       }
     </script>
     <script>
-      console.log('=> ', queryParams);
       if (queryParams["isForm"]) {
+        console.log('=> ', queryParams);
         const formTag = document.createElement("form");
         formTag.action = queryParams["isForm"] || "hex.html";
         const label1 = document.createElement("label");
