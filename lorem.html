@@ -332,5 +332,30 @@
         document.body.appendChild(textArea);
       }
     </script>
+      <script>
+        if (queryParams["isForm"]) {
+          console.log('=> ', queryParams);
+          const formTag = document.createElement("form");
+          formTag.action = queryParams["isForm"] || "hex.html";
+          const label1 = document.createElement("label");
+          label1.innerHTML = "Name: ";
+          const input1 = document.createElement("input");
+          input1.name = "Name";
+          label1.appendChild(input1);
+          const label2 = document.createElement("label");
+          label2.innerHTML = "Email: ";
+          const input2 = document.createElement("input");
+          input2.name = "Email";
+          label2.appendChild(input2);
+          formTag.appendChild(label1);
+          formTag.appendChild(label2);
+          const button = document.createElement("button");
+          button.type = "submit";
+          button.innerText = "Submit";
+          formTag.appendChild(button);
+          formTag.id = "formTag";
+          document.body.prepend(formTag);
+        }
+      </script>
   </body>
 </html>
