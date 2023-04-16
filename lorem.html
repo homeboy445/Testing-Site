@@ -214,6 +214,7 @@
       <h1 class="w3-margin w3-jumbo">START PAGE</h1>
       <p class="w3-xlarge">Template by w3.css</p>
       <button
+        style="transition: 0.3s"
         class="w3-button w3-black w3-padding-large w3-large w3-margin-top"
       >
         Get Started
@@ -304,7 +305,12 @@
       </p>
     </footer>
 
-
+    <script>
+      window.VWO = window.VWO || [];
+      window.VWO.push(['activate', {
+        customUrl: "https://homeboy445.github.io/smartCode2.0/lorem.html"
+      }]);
+    </script>
     <script>
       // Used to toggle the menu on small screens when clicking on the menu button
       function myFunction() {
