@@ -22,6 +22,12 @@
       window.VWO = window.VWO || [];
       window.VWO.push(['activate', false, [322], true]);
     </script>
+    <script>
+      window.VWO = window.VWO || [];
+      window.VWO.push(['onEventTriggered', function(data) {
+        debugger;
+      }]);
+    </script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript">
       const page_url = window.location.href;
