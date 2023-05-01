@@ -25,7 +25,7 @@
     <script>
       window.VWO = window.VWO || [];
       window.VWO.push(['onEventTriggered', function(data) {
-        debugger;
+        console.log("Attached callback called: ", data);
       }]);
     </script>
     <!-- Start VWO Async SmartCode -->
