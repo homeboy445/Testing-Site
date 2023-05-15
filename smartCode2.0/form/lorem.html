@@ -1,417 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>W3.CSS Template</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Lato"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Montserrat"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <script>
-      const page_url = window.location.href;
-      const queryParams = {};
-      page_url
-        .substring(page_url.lastIndexOf("?") + 1)
-        .split("&")
-        .map((i) => i.split("="))
-        .map((param) => (queryParams[param[0]] = param[1]));
-    </script>
-    <!-- Start VWO Async SmartCode -->
-    <script type="text/javascript">
-      window._vwo_code =
-        window._vwo_code ||
-        (function () {
-          var account_id = queryParams["accountId"] || 4000166, // replace 1 with ${accountId} in release string
-            version = 2.0,
-            cc = (function () {
-              try {
-                return JSON.parse(
-                  localStorage.getItem("_vwo_" + account_id + "_config")
-                );
-              } catch (e) {
+
+<head>
+  <title>W3.CSS Template</title>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+  <link
+    rel="stylesheet"
+    href="https://www.w3schools.com/w3css/4/w3.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Montserrat"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <script>
+    const page_url = window.location.href;
+    const queryParams = {};
+    page_url
+      .substring(page_url.lastIndexOf("?") + 1)
+      .split("&")
+      .map((i) => i.split("="))
+      .map((param) => (queryParams[param[0]] = param[1]));
+  </script>
+  <!-- Start VWO Async SmartCode -->
+  <script type="text/javascript">
+    /* eslint-disable no-undef */
+    window._vwo_code = window._vwo_code ||
+      (function () {
+        var account_id = queryParams["account_id"] || 644092, // replace 1 with ${accountId} in release string
+          version = 2.0,
+          settings_tolerance = 2000,
+          hide_element = 'body',
+          hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+          /* DO NOT EDIT BELOW THIS LINE */
+          f = false,
+          d = document,
+          v = d.querySelector('#vwoCode'),
+          cK = '_vwo_' + account_id + '_settings',
+          cc = (function () {
+            try {
+              var config = JSON.parse(localStorage.getItem('_vwo_' + account_id + '_config'));
+              return config && typeof config === 'object' ? config : {};
+            } catch (e) {
+              return {};
+            }
+          })(),
+          stT = cc.stT === 'session' ? window.sessionStorage : window.localStorage;
+        code = {
+          settings_tolerance: function () {
+            return cc.sT || settings_tolerance;
+          },
+          hide_element_style: function () {
+            return '{' + (cc.hES || hide_element_style) + '}';
+          },
+          hide_element: function () {
+            return typeof cc.hE === 'string' ? cc.hE : hide_element;
+          },
+          getVersion: function () {
+            return version;
+          },
+          finish: function () {
+            if (!f) {
+              f = true;
+              var a = d.getElementById('_vis_opt_path_hides');
+              if (a) a.parentNode.removeChild(a);
+            }
+          },
+          finished: function () {
+            return f;
+          },
+          load: function (a) {
+            var s = this.getSettings(),
+              b = d.createElement('script'),
+              t = this;
+            if (s) {
+              setTimeout(function () {
+                b.textContent = s;
+                d.getElementsByTagName('head')[0].appendChild(b);
+                if (!window.VWO) {
+                  stT.removeItem(cK);
+                  t.load(a);
+                }
+              });
+            } else {
+              b.fetchPriority = 'high';
+              b.src = a;
+              b.type = 'text/javascript';
+              b.onerror = function () {
+                _vwo_code.finish();
+              };
+              d.getElementsByTagName('head')[0].appendChild(b);
+            }
+          },
+          /**
+           * @returns cached settings if valid.
+           */
+          getSettings: function () {
+            try {
+              var i = stT.getItem(cK);
+              if (!i) {
                 return;
               }
-            })(),
-            settings_tolerance = (cc && cc.sT) || 2000,
-            library_tolerance = 2500,
-            use_existing_jquery = false,
-            hide_element = (cc && cc.hE) || "body",
-            hide_element_style =
-              (cc && cc.hES) ||
-              "opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important",
-            stT =
-              cc && cc.stT === "session"
-                ? window.sessionStorage
-                : window.localStorage,
-            /* DO NOT EDIT BELOW THIS LINE */
-            cK = "_vwo_" + account_id + "_settings",
-            f = false,
-            d = document,
-            v = d.querySelector("#vwoCode"),
-            code = {
-              use_existing_jquery: function () {
-                return use_existing_jquery;
-              },
-              library_tolerance: function () {
-                return library_tolerance;
-              },
-              hide_element_style: function () {
-                return "{" + hide_element_style + "}";
-              },
-              finish: function () {
-                if (!f) {
-                  f = true;
-                  var e = d.getElementById("_vis_opt_path_hides");
-                  if (e) e.parentNode.removeChild(e);
-                }
-              },
-              finished: function () {
-                return f;
-              },
-              load: function (e) {
-                var t = this.getSettings();
-                var n = d.createElement("script");
-                var i = this;
-                if (t) {
-                  setTimeout(function () {
-                    n.textContent = t;
-                    d.getElementsByTagName("head")[0].appendChild(n);
-                    if (!window.VWO) {
-                      stT.removeItem(cK);
-                      i.load(e);
-                    }
-                  });
-                } else {
-                  n.fetchPriority = "high";
-                  n.src = e;
-                  n.type = "text/javascript";
-                  n.innerText;
-                  n.onerror = function () {
-                    _vwo_code.finish();
-                  };
-                  d.getElementsByTagName("head")[0].appendChild(n);
-                }
-              },
-              getSettings: function () {
-                try {
-                  var e = stT.getItem(cK);
-                  if (!e) {
-                    return;
-                  }
-                  e = JSON.parse(e);
-                  if (new Date().getTime() > e.e) {
-                    stT.removeItem(cK);
-                    return;
-                  }
-                  return e.s;
-                } catch (e) {
-                  return;
-                }
-              },
-              getVersion: function () {
-                return version;
-              },
-              init: function () {
-                if (d.URL.indexOf("__vwo_disable__") > -1) return;
-                window.settings_timer = setTimeout(function () {
-                  _vwo_code.finish();
-                  stT.removeItem(cK);
-                }, settings_tolerance);
-                var e = d.createElement("style"),
-                  t = hide_element
-                    ? hide_element + "{" + hide_element_style + "}"
-                    : "",
-                  n = d.getElementsByTagName("head")[0];
-                e.setAttribute("id", "_vis_opt_path_hides");
-                v && e.setAttribute("nonce", v.nonce);
-                e.setAttribute("type", "text/css");
-                if (e.styleSheet) e.styleSheet.cssText = t;
-                else e.appendChild(d.createTextNode(t));
-                n.appendChild(e);
-                this.load(
-                  "https://dev.visualwebsiteoptimizer.com/j.php?a=" +
-                    account_id +
-                    "&u=" +
-                    encodeURIComponent(d.URL) +
-                    "&vn=" +
-                    version
-                );
-                return settings_timer;
-              },
-            };
-          window._vwo_settings_timer = code.init();
-          return code;
-        })();
-    </script>
-    <!-- End VWO Async SmartCode -->
-    <style>
-      body,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: "Lato", sans-serif;
-      }
-
-      .w3-bar,
-      h1,
-      button {
-        font-family: "Montserrat", sans-serif;
-      }
-
-      .fa-anchor,
-      .fa-coffee {
-        font-size: 200px;
-      }
-      #formTag {
-        display: flex;
-        flex-direction: column;
-        background: linear-gradient(to top, blue, cyan);
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        color: white;
-        font-size: 2rem;
-        padding: 5%;
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- Navbar -->
-    <div class="w3-top">
-      <div class="w3-bar w3-red w3-card w3-left-align w3-large">
-        <a
-          class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red"
-          href="javascript:void(0);"
-          onclick="myFunction()"
-          title="Toggle Navigation Menu"
-          ><i class="fa fa-bars"></i
-        ></a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white"
-          >Home</a
-        >
-        <a
-          href="/Testing-Site/index.html"
-          class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-          >Index.html</a
-        >
-        <a
-          href="/Testing-Site/testing.html"
-          class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-          >Testing.html</a
-        >
-        <p
-          class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-          onclick="history.pushState(null, 'test', 'index.html')"
-          >SPA PUSH</p
-        >
-        <a
-          href="#"
-          class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-          >Link 4</a
-        >
-      </div>
-
-      <!-- Navbar on small screens -->
-      <div
-        id="navDemo"
-        class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large"
-      >
-        <a
-          href="/Testing-Site/index.html"
-          class="w3-bar-item w3-button w3-padding-large"
-          >Index.html</a
-        >
-        <a
-          href="/Testing-Site/testing.html"
-          class="w3-bar-item w3-button w3-padding-large"
-          >Testing.html</a
-        >
-        <a
-          href="#"
-          class="w3-bar-item w3-button w3-padding-large"
-          onclick="history.pushState(null, 'test', 'index.html')"
-          >SPA PUSH</a
-        >
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
-      </div>
-    </div>
-
-    <!-- Header -->
-    <header class="w3-container w3-red w3-center" style="padding: 128px 16px">
-      <h1 class="w3-margin w3-jumbo">START PAGE</h1>
-      <p class="w3-xlarge">Template by w3.css</p>
-      <button
-        class="w3-button w3-black w3-padding-large w3-large w3-margin-top"
-      >
-        Get Started
-      </button>
-    </header>
-
-    <!-- First Grid -->
-    <div class="w3-row-padding w3-padding-64 w3-container">
-      <div class="w3-content">
-        <div class="w3-twothird">
-          <h1>Lorem Ipsum</h1>
-          <h5 class="w3-padding-32">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </h5>
-
-          <p class="w3-text-grey">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat
-            non proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </p>
-        </div>
-
-        <div class="w3-third w3-center">
-          <i class="fa fa-anchor w3-padding-64 w3-text-red"></i>
-        </div>
-      </div>
-    </div>
-
-    <!-- Second Grid -->
-    <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
-      <div class="w3-content">
-        <div class="w3-third w3-center">
-          <i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i>
-        </div>
-
-        <div class="w3-twothird">
-          <h1>Lorem Ipsum</h1>
-          <h5 class="w3-padding-32">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </h5>
-
-          <p class="w3-text-grey">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat
-            non proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <form action="hex.html" id="formTag">
-        <label>name:</label>
-        <input type="text" name="name" />
-        <label>email:</label>
-        <input type="email" name="email" />
-        <button type="submit">Submit</button>
-    </form>
-
-    <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
-      <h1 class="w3-margin w3-xlarge">Quote of the day: live life</h1>
-    </div>
-
-    <!-- Footer -->
-    <footer class="w3-container w3-padding-64 w3-center w3-opacity">
-      <div class="w3-xlarge w3-padding-32">
-        <i class="fa fa-facebook-official w3-hover-opacity"></i>
-        <i class="fa fa-instagram w3-hover-opacity"></i>
-        <i class="fa fa-snapchat w3-hover-opacity"></i>
-        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-        <i class="fa fa-twitter w3-hover-opacity"></i>
-        <i class="fa fa-linkedin w3-hover-opacity"></i>
-      </div>
-      <p>
-        Powered by
-        <a href="https://www.w3schools.com/w3css/default.asp" target="_blank"
-          >w3.css</a
-        >
-      </p>
-    </footer>
-
-    <script>
-      // Used to toggle the menu on small screens when clicking on the menu button
-      function myFunction() {
-        var x = document.getElementById("navDemo");
-        if (x.className.indexOf("w3-show") == -1) {
-          x.className += " w3-show";
-        } else {
-          x.className = x.className.replace(" w3-show", "");
-        }
-      }
-      if (window.location.href.includes("?debugger=true")) {
-        const textArea = document.createElement("textarea");
-        textArea.style.height = "400px";
-        textArea.style.width = "400px";
-        textArea.style.overflow = "scroll";
-        textArea.style.position = "fixed";
-        textArea.style.top = "60%";
-        const log = (value) => {
-          textArea.value = textArea.value + " - " + value;
+              i = JSON.parse(i);
+              if (new Date().getTime() > i.e) {
+                stT.removeItem(cK);
+                return;
+              }
+              return i.s;
+            } catch (e) {
+              return;
+            }
+          },
+          init: function () {
+            if (d.URL.indexOf('__vwo_disable__') > -1) return;
+            var sT = this.settings_tolerance();
+            window.settings_timer = setTimeout(function () {
+              _vwo_code.finish();
+              stT.removeItem(cK);
+            }, sT);
+            var a = d.createElement('style'),
+              hE = this.hide_element(),
+              b = hE ? hE + this.hide_element_style() : '',
+              h = d.getElementsByTagName('head')[0];
+            a.setAttribute('id', '_vis_opt_path_hides');
+            v && a.setAttribute('nonce', v.nonce);
+            a.setAttribute('type', 'text/css');
+            if (a.styleSheet) a.styleSheet.cssText = b;
+            else a.appendChild(d.createTextNode(b));
+            h.appendChild(a);
+            this.load(
+              'https://dev.visualwebsiteoptimizer.com/j.php?a=' +
+              account_id +
+              '&u=' +
+              encodeURIComponent(d.URL) +
+              '&vn=' +
+              version
+            );
+            return settings_timer;
+          },
         };
-        log(JSON.stringify(window.chrome));
-        document
-          .querySelector("body > header > button")
-          .addEventListener("pointerdown", () => log("pointerdown"));
-        document
-          .querySelector("body > header > button")
-          .addEventListener("pointerup", () => log("pointerup"));
-        document
-          .querySelector("body > header > button")
-          .addEventListener("pointermove", () => log("pointermove"));
-        document.body.appendChild(textArea);
+        window._vwo_settings_timer = code.init();
+        return code;
+      })();
+  </script>
+  <!-- End VWO Async SmartCode -->
+  <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Lato", sans-serif;
+    }
+
+    .w3-bar,
+    h1,
+    button {
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .fa-anchor,
+    .fa-coffee {
+      font-size: 200px;
+    }
+
+    #formTag {
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(to top, blue, cyan);
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      color: white;
+      font-size: 2rem;
+      padding: 5%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+      <a
+        class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red"
+        href="javascript:void(0);"
+        onclick="myFunction()"
+        title="Toggle Navigation Menu"
+      ><i class="fa fa-bars"></i></a>
+      <a
+        href="#"
+        class="w3-bar-item w3-button w3-padding-large w3-white"
+      >Home</a>
+      <a
+        href="/Testing-Site/index.html"
+        class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+      >Index.html</a>
+      <a
+        href="/Testing-Site/testing.html"
+        class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+      >Testing.html</a>
+      <p
+        class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+        onclick="history.pushState(null, 'test', 'index.html')"
+      >SPA PUSH</p>
+      <a
+        href="#"
+        class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+      >Link 4</a>
+    </div>
+
+    <!-- Navbar on small screens -->
+    <div
+      id="navDemo"
+      class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large"
+    >
+      <a
+        href="/Testing-Site/index.html"
+        class="w3-bar-item w3-button w3-padding-large"
+      >Index.html</a>
+      <a
+        href="/Testing-Site/testing.html"
+        class="w3-bar-item w3-button w3-padding-large"
+      >Testing.html</a>
+      <a
+        href="#"
+        class="w3-bar-item w3-button w3-padding-large"
+        onclick="history.pushState(null, 'test', 'index.html')"
+      >SPA PUSH</a>
+      <a
+        href="#"
+        class="w3-bar-item w3-button w3-padding-large"
+      >Link 4</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header
+    class="w3-container w3-red w3-center"
+    style="padding: 128px 16px"
+  >
+    <h1 class="w3-margin w3-jumbo">START PAGE</h1>
+    <p class="w3-xlarge">Template by w3.css</p>
+    <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">
+      Get Started
+    </button>
+  </header>
+
+  <!-- First Grid -->
+  <div class="w3-row-padding w3-padding-64 w3-container">
+    <div class="w3-content">
+      <div class="w3-twothird">
+        <h1>Lorem Ipsum</h1>
+        <h5 class="w3-padding-32">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </h5>
+
+        <p class="w3-text-grey">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat
+          non proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+          ea commodo consequat.
+        </p>
+      </div>
+
+      <div class="w3-third w3-center">
+        <i class="fa fa-anchor w3-padding-64 w3-text-red"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Grid -->
+  <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+    <div class="w3-content">
+      <div class="w3-third w3-center">
+        <i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i>
+      </div>
+
+      <div class="w3-twothird">
+        <h1>Lorem Ipsum</h1>
+        <h5 class="w3-padding-32">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </h5>
+
+        <p class="w3-text-grey">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat
+          non proident, sunt in culpa qui officia deserunt mollit anim id est
+          laborum consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+          veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+          ea commodo consequat.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <form
+    action="hex.html"
+    id="formTag"
+  >
+    <label>name:</label>
+    <input
+      type="text"
+      name="name"
+    />
+    <label>email:</label>
+    <input
+      type="email"
+      name="email"
+    />
+    <button type="submit">Submit</button>
+  </form>
+
+  <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <h1 class="w3-margin w3-xlarge">Quote of the day: live life</h1>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-64 w3-center w3-opacity">
+    <div class="w3-xlarge w3-padding-32">
+      <i class="fa fa-facebook-official w3-hover-opacity"></i>
+      <i class="fa fa-instagram w3-hover-opacity"></i>
+      <i class="fa fa-snapchat w3-hover-opacity"></i>
+      <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+      <i class="fa fa-twitter w3-hover-opacity"></i>
+      <i class="fa fa-linkedin w3-hover-opacity"></i>
+    </div>
+    <p>
+      Powered by
+      <a
+        href="https://www.w3schools.com/w3css/default.asp"
+        target="_blank"
+      >w3.css</a>
+    </p>
+  </footer>
+
+  <script>
+    // Used to toggle the menu on small screens when clicking on the menu button
+    function myFunction() {
+      var x = document.getElementById("navDemo");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
       }
-    </script>
-    <script>
-      if (queryParams["isForm"]) {
-        console.log('=> ', queryParams);
-        const formTag = document.createElement("form");
-        formTag.action = queryParams["isForm"] || "hex.html";
-        const label1 = document.createElement("label");
-        label1.innerHTML = "Name: ";
-        const input1 = document.createElement("input");
-        input1.name = "Name";
-        label1.appendChild(input1);
-        const label2 = document.createElement("label");
-        label2.innerHTML = "Email: ";
-        const input2 = document.createElement("input");
-        input2.name = "Email";
-        label2.appendChild(input2);
-        formTag.appendChild(label1);
-        formTag.appendChild(label2);
-        const button = document.createElement("button");
-        button.type = "submit";
-        button.innerText = "Submit";
-        formTag.appendChild(button);
-        formTag.id = "formTag";
-        document.body.prepend(formTag);
-      }
-    </script>
-  </body>
+    }
+    if (window.location.href.includes("?debugger=true")) {
+      const textArea = document.createElement("textarea");
+      textArea.style.height = "400px";
+      textArea.style.width = "400px";
+      textArea.style.overflow = "scroll";
+      textArea.style.position = "fixed";
+      textArea.style.top = "60%";
+      const log = (value) => {
+        textArea.value = textArea.value + " - " + value;
+      };
+      log(JSON.stringify(window.chrome));
+      document
+        .querySelector("body > header > button")
+        .addEventListener("pointerdown", () => log("pointerdown"));
+      document
+        .querySelector("body > header > button")
+        .addEventListener("pointerup", () => log("pointerup"));
+      document
+        .querySelector("body > header > button")
+        .addEventListener("pointermove", () => log("pointermove"));
+      document.body.appendChild(textArea);
+    }
+  </script>
+  <script>
+    if (queryParams["isForm"]) {
+      console.log('=> ', queryParams);
+      const formTag = document.createElement("form");
+      formTag.action = queryParams["isForm"] || "hex.html";
+      const label1 = document.createElement("label");
+      label1.innerHTML = "Name: ";
+      const input1 = document.createElement("input");
+      input1.name = "Name";
+      label1.appendChild(input1);
+      const label2 = document.createElement("label");
+      label2.innerHTML = "Email: ";
+      const input2 = document.createElement("input");
+      input2.name = "Email";
+      label2.appendChild(input2);
+      formTag.appendChild(label1);
+      formTag.appendChild(label2);
+      const button = document.createElement("button");
+      button.type = "submit";
+      button.innerText = "Submit";
+      formTag.appendChild(button);
+      formTag.id = "formTag";
+      document.body.prepend(formTag);
+    }
+  </script>
+</body>
+
 </html>
