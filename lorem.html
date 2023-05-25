@@ -24,6 +24,13 @@
         console.log("Attached callback called: ", data);
       }]);
     </script>
+    <script>
+      window.VWO = window.VWO || [];
+      VWO.push(['activate', {
+        expIds: 112,
+        manual: false
+      }]);
+    </script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript">
       const page_url = window.location.href;
