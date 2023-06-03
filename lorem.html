@@ -19,36 +19,40 @@
     />
     <script src="https://www.googleoptimize.com/optimize.js?id=OPT-N7WR3V4"></script>
     <script>
-      window.VWO = window.VWO || [];
-      window.VWO.push(['onEventTriggered', function(data) {
-        console.log("Attached callback called: ", data);
-      }]);
-    </script>
-    <script>
-      window.VWO = window.VWO || [];
-      VWO.push(['activate', {
-        expIds: 112,
-        manual: false
-      }]);
-    </script>
-    <!-- Start VWO Async SmartCode -->
-    <script type="text/javascript">
       const page_url = window.location.href;
       const queryParams = {};
-      window.personalUtil = {};
       page_url
         .substring(page_url.lastIndexOf("?") + 1)
         .split("&")
         .map((i) => i.split("="))
         .map((param) => (queryParams[param[0]] = param[1]));
+    </script>
+    <script>
+      if (queryParams["overrideCookieSetter"]) {
+        var t =
+          Object.getOwnPropertyDescriptor(Document.prototype, "cookie") ||
+          Object.getOwnPropertyDescriptor(HTMLDocument.prototype, "cookie");
+        t &&
+          Object.defineProperty(document, "cookie", {
+            get: function () {
+              return t.get.call(document);
+            },
+            set: function (i) {
+              return t.set.call(document, i);
+            },
+          });
+      }
+    </script>
+    <!-- Start VWO Async SmartCode -->
+    <script type="text/javascript">
       if (queryParams["googleOpt"]) {
         window.run = () => {
           console.log("THIS IS RUNNING!!!");
         };
       }
-      window.personalUtil.queryParams = queryParams;
+      window.queryParams = queryParams;
       if (queryParams["userAgent"]) {
-        const textArea = document.createElement('textarea');
+        const textArea = document.createElement("textarea");
         textArea.value = window.navigator.userAgent;
         textArea.style.width = "400px";
         textArea.style.height = "400px";
@@ -70,7 +74,7 @@
               settings_tolerance = 2000,
               library_tolerance = 2500,
               use_existing_jquery = false,
-              version=1.4,
+              version = 1.4,
               is_spa = 1,
               hide_element = "body",
               /* DO NOT EDIT BELOW THIS LINE */
@@ -132,7 +136,8 @@
                   return settings_timer;
                 },
               };
-            window._vwo_settings_timer = !queryParams["googleOpt"] && code.init();
+            window._vwo_settings_timer =
+              !queryParams["googleOpt"] && code.init();
             return code;
           })();
       }
@@ -189,7 +194,9 @@
         <p
           class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
           onclick="history.pushState(null, 'test', 'index.html')"
-          >SPA PUSH</p>
+        >
+          SPA PUSH
+        </p>
         <a
           href="#"
           class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
@@ -328,46 +335,52 @@
         }
       }
       if (window.location.href.includes("?debugger=true")) {
-        const textArea = document.createElement('textarea');
+        const textArea = document.createElement("textarea");
         textArea.style.height = "400px";
         textArea.style.width = "400px";
         textArea.style.overflow = "scroll";
         textArea.style.position = "fixed";
         textArea.style.top = "60%";
         const log = (value) => {
-          textArea.value = textArea.value + ' - ' + value;
-        }
+          textArea.value = textArea.value + " - " + value;
+        };
         log(JSON.stringify(window.chrome));
-        document.querySelector("body > header > button").addEventListener("pointerdown", () => log("pointerdown"));
-        document.querySelector("body > header > button").addEventListener("pointerup", () => log("pointerup"));
-        document.querySelector("body > header > button").addEventListener("pointermove", () => log("pointermove"));
+        document
+          .querySelector("body > header > button")
+          .addEventListener("pointerdown", () => log("pointerdown"));
+        document
+          .querySelector("body > header > button")
+          .addEventListener("pointerup", () => log("pointerup"));
+        document
+          .querySelector("body > header > button")
+          .addEventListener("pointermove", () => log("pointermove"));
         document.body.appendChild(textArea);
       }
     </script>
-      <script>
-        if (queryParams["isForm"]) {
-          console.log('=> ', queryParams);
-          const formTag = document.createElement("form");
-          formTag.action = queryParams["isForm"] || "hex.html";
-          const label1 = document.createElement("label");
-          label1.innerHTML = "Name: ";
-          const input1 = document.createElement("input");
-          input1.name = "Name";
-          label1.appendChild(input1);
-          const label2 = document.createElement("label");
-          label2.innerHTML = "Email: ";
-          const input2 = document.createElement("input");
-          input2.name = "Email";
-          label2.appendChild(input2);
-          formTag.appendChild(label1);
-          formTag.appendChild(label2);
-          const button = document.createElement("button");
-          button.type = "submit";
-          button.innerText = "Submit";
-          formTag.appendChild(button);
-          formTag.id = "formTag";
-          document.body.prepend(formTag);
-        }
-      </script>
+    <script>
+      if (queryParams["isForm"]) {
+        console.log("=> ", queryParams);
+        const formTag = document.createElement("form");
+        formTag.action = queryParams["isForm"] || "hex.html";
+        const label1 = document.createElement("label");
+        label1.innerHTML = "Name: ";
+        const input1 = document.createElement("input");
+        input1.name = "Name";
+        label1.appendChild(input1);
+        const label2 = document.createElement("label");
+        label2.innerHTML = "Email: ";
+        const input2 = document.createElement("input");
+        input2.name = "Email";
+        label2.appendChild(input2);
+        formTag.appendChild(label1);
+        formTag.appendChild(label2);
+        const button = document.createElement("button");
+        button.type = "submit";
+        button.innerText = "Submit";
+        formTag.appendChild(button);
+        formTag.id = "formTag";
+        document.body.prepend(formTag);
+      }
+    </script>
   </body>
 </html>
