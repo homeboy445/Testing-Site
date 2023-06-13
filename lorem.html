@@ -71,6 +71,7 @@
               (window._vwo_code.finished() || window._vwo_code.libExecuted)) ||
             hardLimitTimedout
           ) {
+            console.log("~~ tryNonVWOTracking:", window.willRedirectionOccurByVWO);
             if (!window.willRedirectionOccurByVWO) {
               clearTimeout(hardLimitTimer);
               for (var i = 0; i < nonVWOScriptsToExecute.length; i++) {
