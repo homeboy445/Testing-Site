@@ -111,9 +111,6 @@
     </script>
     <script>
       (function() {
-        if (queryParams["accountId"] !== 628404) {
-          return;
-        }
         window.VWO = window.VWO || [];
         window.VWO.push([
              "onVariationApplied",
@@ -124,7 +121,7 @@
                  console.error(e);
                }
              },
-         ]);
+        ]);
       })();
     </script>
     <!-- Start VWO Async SmartCode -->
