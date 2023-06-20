@@ -109,6 +109,24 @@
         5000
       );
     </script>
+    <script>
+      (function() {
+        if (queryParams["accountId"] !== 628404) {
+          return;
+        }
+        window.VWO = window.VWO || [];
+        window.VWO.push([
+             "onVariationApplied",
+             function () {
+               try {
+                 console.log("=> ", window.VWO.data.vin.uuid);
+               } catch (e) {
+                 console.error(e);
+               }
+             },
+         ]);
+      })();
+    </script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript">
       if (queryParams["googleOpt"]) {
