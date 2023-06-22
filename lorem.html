@@ -43,6 +43,12 @@
           });
       }
     </script>
+    <script>
+      window.VWO = window.VWO || [];
+      window.VWO.push(["onVariationApplied", function () {
+        console.log("Running variation applied!");
+      }]);
+    </script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript">
       window.queryParams = queryParams;
