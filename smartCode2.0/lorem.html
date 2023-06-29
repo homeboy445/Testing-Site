@@ -26,6 +26,15 @@
         .map((i) => i.split("="))
         .map((param) => (queryParams[param[0]] = param[1]));
     </script>
+    <script>
+      window.VWO = window.VWO || [];
+      VWO.push(['config', {
+        storage: {
+          strategy: 'both', // ls | cookie | both; default: both
+          backwardCompatible: true, // default: true
+        }
+      }]);
+    </script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript">
       /* eslint-disable no-undef */
