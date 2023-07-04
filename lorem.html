@@ -28,13 +28,13 @@
         .map((param) => (queryParams[param[0]] = param[1]));
     </script>
     <script>
-      window.VWO = window.VWO || [];
-      VWO.push(['config', {
-        storage: {
-          strategy: 'both', // ls | cookie | both; default: both
-          backwardCompatible: false, // default: true
-        }
-      }]);
+      // window.VWO = window.VWO || [];
+      // VWO.push(['config', {
+      //   storage: {
+      //     strategy: 'both', // ls | cookie | both; default: both
+      //     backwardCompatible: false, // default: true
+      //   }
+      // }]);
     </script>
     <script>
       if (queryParams["overrideCookieSetter"]) {
