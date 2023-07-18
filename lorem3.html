@@ -25,8 +25,9 @@
       referrerpolicy="no-referrer"
     ></script>
     <script>
-      	VWO.event = VWO.event || function () {VWO.push(['event'].concat([].slice.call(arguments)))};
-        VWO.event('this is a test event', {
+      	window.VWO = window.VWO || [];
+        window.VWO.event = VWO.event || function () {VWO.push(['event'].concat([].slice.call(arguments)))};
+        window.VWO.event('this is a test event', {
           'number': 1
         });
     </script>
