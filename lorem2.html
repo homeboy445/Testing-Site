@@ -327,7 +327,7 @@
 
         log(methodName, message) {
           const line = this.createLine();
-          line.setMessage(`=>${methodName}: ${message}`);
+          line.setMessage(`=>${methodName}: ${JSON.parse(JSON.stringify(message))}`);
           this.terminal.appendChild(line.element);
         }
 
