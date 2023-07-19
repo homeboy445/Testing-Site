@@ -24,6 +24,27 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
   />
+  <script>
+      const logsQueue = [];
+      const oldConsole = {};
+      const consoleMethods = Object.keys(console);
+      const terminalLogger = {
+        log: (method, ...args) => {
+          logsQueue.push([method, ...args]);
+        }
+      };
+
+      consoleMethods.forEach((method) => {
+        if (method === "memory") {
+          return;
+        }
+        oldConsole[method] = console[method].bind(console);
+        console[method] = (...args) => {
+          terminalLogger.log(method, ...args);
+          oldConsole[method](...args);
+        }
+      });
+  </script>
   <!-- Start VWO Async SmartCode -->
   <script src="./utils/asyncCode.js"></script>
   <!-- End VWO Async SmartCode -->
@@ -283,7 +304,7 @@
   <script>
     function enableTerminalSupport() {
 
-      if (!location.href.indexOf("enableTerminal=true")) {
+      if (location.href.indexOf("enableTerminal=true") === -1) {
         return;
       }
 
@@ -332,21 +353,11 @@
         }
       }
 
-      const oldConsole = {};
-      const consoleMethods = Object.keys(console);
-
-      consoleMethods.forEach((method) => {
-        if (method === "memory") {
-          return;
-        }
-        oldConsole[method] = console[method].bind(console);
-        console[method] = (...args) => {
-          T.log(method, ...args);
-          oldConsole[method](...args);
-        }
-      });
-
       const T = new Terminal();
+
+      terminalLogger.log = T.log.bind(T);
+
+      logsQueue.forEach(([method, message]) => T.log(method, message));
 
       }
 
