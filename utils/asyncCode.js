@@ -1,7 +1,15 @@
+const page_url = window.location.href;
+const queryParams = {};
+page_url
+  .substring(page_url.lastIndexOf("?") + 1)
+  .split("&")
+  .map((i) => i.split("="))
+  .map((param) => (queryParams[param[0]] = param[1]));
+
 window._vwo_code =
 window._vwo_code ||
 (function () {
-  var account_id = 644092,
+  var account_id = queryParams["accountId"] || 644092,
     settings_tolerance = 2000,
     library_tolerance = 2500,
     use_existing_jquery = false,
