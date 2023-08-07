@@ -25,11 +25,11 @@
       referrerpolicy="no-referrer"
     ></script>
     <script>
-      	window.VWO = window.VWO || [];
-        window.VWO.event = VWO.event || function () {VWO.push(['event'].concat([].slice.call(arguments)))};
-        window.VWO.event('this is a test event', {
-          'number': 1
-        });
+      window.VWO = window.VWO || [];
+      VWO.event = VWO.event || function () {VWO.push(['event'].concat([].slice.call(arguments)))};
+      VWO.event('event1', {
+        'prop1':'<text_value>'
+      })
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <!-- Start VWO Async SmartCode -->
