@@ -11,25 +11,25 @@
     />
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript">
-      const page_url = window.location.href;
-      const queryParams = {};
-      page_url
-        .substring(page_url.lastIndexOf("?") + 1)
-        .split("&")
-        .map((i) => i.split("="))
-        .map((param) => (queryParams[param[0]] = param[1]));
-      if (queryParams["mode"] === "osc") {
-        var script = document.createElement("script");
-        script.src = `https://dev.visualwebsiteoptimizer.com/lib/${
-          queryParams["accountId"] || 4000166
-        }.js`;
-        script.type = "text/javascript";
-        document.getElementsByTagName("head")[0].appendChild(script);
-      } else {
+      // const page_url = window.location.href;
+      // const queryParams = {};
+      // page_url
+      //   .substring(page_url.lastIndexOf("?") + 1)
+      //   .split("&")
+      //   .map((i) => i.split("="))
+      //   .map((param) => (queryParams[param[0]] = param[1]));
+      // if (queryParams["mode"] === "osc") {
+      //   var script = document.createElement("script");
+      //   script.src = `https://dev.visualwebsiteoptimizer.com/lib/${
+      //     queryParams["accountId"] || 4000166
+      //   }.js`;
+      //   script.type = "text/javascript";
+      //   document.getElementsByTagName("head")[0].appendChild(script);
+      // } else {
         window._vwo_code =
           window._vwo_code ||
           (function () {
-            var account_id = queryParams["accountId"] || 4000166,
+            var account_id = 644092,
               settings_tolerance = 2000,
               library_tolerance = 2500,
               use_existing_jquery = false,
@@ -97,7 +97,7 @@
             window._vwo_settings_timer = code.init();
             return code;
           })();
-      }
+      // }
     </script>
     <script src="https://www.googleoptimize.com/optimize.js?id=OPT-N7WR3V4"></script>
     <!-- End VWO Async SmartCode -->
