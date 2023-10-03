@@ -50,6 +50,8 @@
     </script>
     <!-- End Google Tag Manager -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript" id="vwoCode">
       // window._vwo_server_url="https://dacdn.visualwebsiteoptimizer.com/";
@@ -62,7 +64,7 @@
             library_tolerance = 2500,
             use_existing_jquery = false,
             is_spa = 1,
-            hide_element = "body",
+            hide_element = "",
             /* DO NOT EDIT BELOW THIS LINE */
             f = false,
             d = document,
@@ -204,6 +206,40 @@
         background: yellow;
       }
     </style>
+    <style>
+
+    * { box-sizing: border-box; }
+
+    body { font-family: sans-serif; }
+
+    .carousel {
+      background: #EEE;
+    }
+
+    .carousel-cell {
+      width: 28%;
+      height: 200px;
+      margin-right: 10px;
+      background: #8C8;
+      border-radius: 5px;
+      counter-increment: carousel-cell;
+    }
+
+    .carousel-cell.is-selected {
+      background: #ED2;
+    }
+
+    /* cell number */
+    .carousel-cell:before {
+      display: block;
+      text-align: center;
+      content: counter(carousel-cell);
+      line-height: 200px;
+      font-size: 80px;
+      color: white;
+    }
+
+    </style>
   </head>
 
   <body>
@@ -260,8 +296,7 @@
         <a
           href="/Testing-Site/testing.html"
           class="w3-bar-item w3-button w3-padding-large"
-          >Testing.html</a
-        >
+          >Testing.html</a>
         <a
           href="#"
           class="w3-bar-item w3-button w3-padding-large"
@@ -357,6 +392,24 @@
         src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1600"
         alt="$"
       />
+    </div>
+
+    <div id="flickity-container">
+      <h1>Flickity - groupCells</h1>
+      <!-- Flickity HTML init -->
+      <div class="carousel" data-flickity='{ "groupCells": true }'>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+      </div>
     </div>
 
     <!-- Footer -->
