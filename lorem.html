@@ -275,39 +275,6 @@
       </div>
     </header>
 
-    <script>
-      {
-        const div = document.querySelector('.tp-div');
-        const button1 = document.getElementById('tp-btn-1');
-        const button2 = document.querySelector('.tp-sb-btn-1');
-        let timer = 1000;
-        document.addEventListener("mouseenter", () => {
-          console.log("MOUSEeNTERED on DOCUMENT!");
-        }, true);
-        const keyFrames = [{
-          opacity: 0,
-          transform: "translateY(-1.5rem)"
-        }, {
-          opacity: 1,
-          transform: "translateY(0)"
-        }];
-        div.addEventListener("mouseenter", () => {
-          console.log("MOUSEeNTERED on DIV");
-          button2.animate(keyFrames, {
-            duration: 2000
-          });
-        });
-        div.addEventListener("mouseleave", () => {
-          console.log("MOuse leave");
-          var animationArray = document.getAnimations();
-          animationArray.forEach(function (animation) {
-            animation.reverse();
-            animation.cancel();
-          });
-        });
-      }
-    </script>
-
     <!-- First Grid -->
     <div class="w3-row-padding w3-padding-64 w3-container">
       <div class="w3-content">
