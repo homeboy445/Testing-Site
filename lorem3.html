@@ -10422,7 +10422,13 @@
       rel="stylesheet"
       href="https://unpkg.com/flickity@2/dist/flickity.min.css"
     />
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script>
+      window.VWO = window.VWO || [];
+      VWO.event = VWO.event || function () {VWO.push(['event'].concat([].slice.call(arguments)))};
+      VWO.event('event1', {
+        'prop1': Math.abs(Math.random() * 100)
+      });
+    </script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript" id="vwoCode">
       // window._vwo_server_url="https://dacdn.visualwebsiteoptimizer.com/";
