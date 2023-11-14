@@ -467,7 +467,7 @@ _vwo_code.isConsentPending = 1;
         },
         actionOnBasisOfState: function (state) {
           if (!state || window._vwo_settings_timer) return;
-          var shouldClearAllIntervals;t
+          var shouldClearAllIntervals;
           if (state === "1") {
             if (!_vwo_code.isConsentPending) hide_element = "body";
             this.showLoader();
