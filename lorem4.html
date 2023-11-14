@@ -894,7 +894,7 @@ function OptanonWrapper() {
 
         acceptBtn.onclick = () => {
           document.cookie = "consentGiven=1; max-age=" + 60 * 60 * 24 * 30;
-          _vwo_code.removeLoaderAndOverlay();
+          _vwo_code.actionOnBasisOfState("2");
           if (document.cookie) {
             cookieBox.classList.add("hide");
           } else {
