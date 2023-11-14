@@ -576,7 +576,7 @@ _vwo_code.isConsentPending = 1;
       window._vwo_code = code;
   })();
 
-      if (document.cookie.includes("OptanonConsent") && document.cookie.includes("OptanonAlertBoxClosed") && window.localStorage.getItem("isConsentGivenToVWO") || true) {
+      if (document.cookie.includes("OptanonConsent") && document.cookie.includes("OptanonAlertBoxClosed") && window.localStorage.getItem("isConsentGivenToVWO")) {
         window._vwo_code.actionOnBasisOfState("1");
       }
       }
@@ -697,6 +697,21 @@ _vwo_code.isConsentPending = 1;
   </head>
 
   <body>
+    <script>
+        _vwo_code.setFilterConfigAndApplyFilter({
+        popupSelector: ".wrapper",
+        filterTime: "best",
+        isConsentGiven: function () {
+          var consentCookieVal = _getCookie("consentGiven");
+          if (consentCookieVal === "1") {
+            return "1";
+          } else if (consentCookieVal === "2") {
+            return "2";
+          }
+        },
+        filterTolerance: 10000,
+      });
+    </script>
     <div class="wrapper" style="z-index: 2147483647">
       <img
         src="https://2.bp.blogspot.com/-hIyV0x4yKpM/XGm5Irou9dI/AAAAAAAAITs/6G7qGPyS9xcbppciDvAgjNIbJUMh_XqFACLcBGAs/s1600/CAT_Cute%2BSesame%2BClipart%2B3.png"
