@@ -17,120 +17,342 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-N7WR3V4"></script>
-    <!-- <script>
-      (function() {
-        if (location.search.indexOf("prototype=true")) {
-          const script = document.createElement('script');
-          script.src = "https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js";
-          document.head.appendChild(script);
+    <script type="text/javascript">
+      function _getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(";");
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == " ") c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0)
+            return c.substring(nameEQ.length, c.length);
         }
-      })();
-    </script> -->
-    <script>
-      const page_url = window.location.href;
-      const queryParams = {};
-      page_url
-        .substring(page_url.lastIndexOf("?") + 1)
-        .split("&")
-        .map((i) => i.split("="))
-        .map((param) => (queryParams[param[0]] = param[1]));
-    </script>
-    <script>
-      window.VWO = window.VWO || [];
-      VWO.push([
-        "config",
-        {
-          storage: {
-            strategy: "both", // ls | cookie | both; default: both
-            backwardCompatible: true, // default: true
-          },
-        },
-      ]);
-    </script>
-    <script>
-      if (queryParams["overrideCookieSetter"]) {
-        var t =
-          Object.getOwnPropertyDescriptor(Document.prototype, "cookie") ||
-          Object.getOwnPropertyDescriptor(HTMLDocument.prototype, "cookie");
-        t &&
-          Object.defineProperty(document, "cookie", {
-            get: function () {
-              return t.get.call(document);
-            },
-            set: function (i) {
-              return t.set.call(document, i);
-            },
-          });
+        return null;
       }
-    </script>
-    <script>
-      window.VWO = window.VWO || [];
-      window.VWO.push([
-        "onVariationApplied",
-        function () {
-          console.log("Running variation applied!");
-        },
-      ]);
-    </script>
-    <script>
-      // vwo tests
-      (function () {
-        window._vwo_evq = window._vwo_evq || [];
-        var _vwoOldPush = window._vwo_evq.push;
-        var processEvent = function () {
-          var eventData = arguments[0];
-          if (eventData[0] === "rH" || eventData[0] === "vS") {
-            //debugger;
-            console.log(
-              eventData[0] +
-                " : " +
-                eventData[1] +
-                " (" +
-                _vwo_exp[eventData[1]].type +
-                ") " +
-                ":" +
-                eventData[1] +
-                "-" +
-                eventData[2]
-            );
-          } else if (eventData[0] === "uC") {
-            console.log("url changed");
-          } else if (eventData[0] === "submit") {
-            console.log(eventData[0]);
-          }
-        };
-        for (var i = 0; i < window._vwo_evq.length; i++) {
-          processEvent(window._vwo_evq[i]);
-        }
-        window._vwo_evq.push = function () {
-          processEvent.apply(this, [].slice.call(arguments));
-          _vwoOldPush.apply(window._vwo_evq, [].slice.call(arguments));
-        };
-      })();
     </script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript">
-      window.queryParams = queryParams;
-      if (queryParams["userAgent"]) {
-        const textArea = document.createElement("textarea");
-        textArea.value = window.navigator.userAgent;
-        textArea.style.width = "400px";
-        textArea.style.height = "400px";
-        setTimeout(() => {
-          window.document.body.appendChild(textArea);
-        }, 1000);
-      } else if (queryParams["mode"] === "osc") {
-        var script = document.createElement("script");
-        script.src = `https://dev.visualwebsiteoptimizer.com/lib/${
-          queryParams["accountId"] || 4000166
-        }.js`;
-        script.type = "text/javascript";
-        document.getElementsByTagName("head")[0].appendChild(script);
-      } else {
+      if (location.search.indexOf("smartCode") == -1) {
+        const params = new URLSearchParams(window.location.search);
+        const accId = parseInt(params.get("id"));
+        const accountId = accId || 644092;
+        //DO NOT make any changes to the smart code except for entering your account id
+        window._vwo_code =
+          window._vwo_code ||
+          (function () {
+            var account_id = accountId,
+              version = 1.5,
+              settings_tolerance = 2000,
+              library_tolerance = 5000,
+              use_existing_jquery = false,
+              is_spa = 1,
+              hide_element = "",
+              hide_element_style =
+                "opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important",
+              /* DO NOT EDIT BELOW THIS LINE */
+              f = false,
+              d = document,
+              filterToleranceTimer,
+              vwoCodeEl = d.querySelector("#vwoCode"),
+              code = {
+                use_existing_jquery: function () {
+                  return use_existing_jquery;
+                },
+                library_tolerance: function () {
+                  return library_tolerance;
+                },
+                hide_element_style: function () {
+                  return "{" + hide_element_style + "}";
+                },
+                finish: function () {
+                  if (!f) {
+                    f = true;
+                    var a = d.getElementById("_vis_opt_path_hides");
+                    if (a) a.parentNode.removeChild(a);
+                  }
+                },
+                finished: function () {
+                  return f;
+                },
+                load: function (a) {
+                  var b = d.createElement("script");
+                  b.src = a;
+                  b.type = "text/javascript";
+                  b.innerText;
+                  b.onerror = function () {
+                    _vwo_code.finish();
+                  };
+                  d.getElementsByTagName("head")[0].appendChild(b);
+                },
+                getVersion: function () {
+                  return version;
+                },
+                getMatchedCookies: function (matchPattern) {
+                  var matchedCookies = [];
+                  if (document.cookie) {
+                    matchedCookies = document.cookie.match(matchPattern) || [];
+                  }
+                  return matchedCookies;
+                },
+                getCombinationCookie: function () {
+                  var matchedCookies = code.getMatchedCookies(
+                    /(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi
+                  );
+                  matchedCookies = matchedCookies.map(function (cookie) {
+                    try {
+                      var decodedCookie = decodeURIComponent(cookie);
+                      if (
+                        !/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(
+                          decodedCookie
+                        )
+                      ) {
+                        return "";
+                      }
+                      return decodedCookie;
+                    } catch (e) {
+                      return "";
+                    }
+                  });
+                  var combinations = [];
+                  matchedCookies.forEach(function (each) {
+                    var cookiePair = each.match(/([\d,]+)/g);
+                    cookiePair && combinations.push(cookiePair.join("-"));
+                  });
+                  return combinations.join("|");
+                },
+                init: function () {
+                  if (d.URL.indexOf("__vwo_disable__") > -1) return;
+                  window.settings_timer = setTimeout(function () {
+                    _vwo_code.finish();
+                    _vwo_code.removeLoaderAndOverlay();
+                  }, settings_tolerance);
+                  var filterConfig = this.filterConfig;
+                  if (!filterConfig || filterConfig.filterTime === "balanced") {
+                    var a = d.createElement("style"),
+                      b = hide_element
+                        ? hide_element + "{" + hide_element_style + "}"
+                        : "",
+                      h = d.getElementsByTagName("head")[0];
+                    a.setAttribute("id", "_vis_opt_path_hides");
+                    vwoCodeEl && a.setAttribute("nonce", vwoCodeEl.nonce);
+                    a.setAttribute("type", "text/css");
+                    if (a.styleSheet) a.styleSheet.cssText = b;
+                    else a.appendChild(d.createTextNode(b));
+                    h.appendChild(a);
+                  }
+                  if (filterConfig && filterConfig.filterTime === "early") {
+                    this.removeLoaderAndOverlay();
+                  }
+                  var c = this.getCombinationCookie();
+                  this.load(
+                    "https://dev.visualwebsiteoptimizer.com/j.php?a=" +
+                      account_id +
+                      "&u=" +
+                      encodeURIComponent(d.URL) +
+                      "&f=" +
+                      +is_spa +
+                      "&vn=" +
+                      version +
+                      (c ? "&c=" + c : "")
+                  );
+                  return settings_timer;
+                },
+                setFilterConfigAndApplyFilter: function (config) {
+                  _vwo_code.isConsentPending = 1;
+                  if (!config) {
+                    return;
+                  }
+                  this.filterConfig = config;
+                  if (this.isNonLiveMode()) {
+                    this.actionOnBasisOfState("1");
+                    return;
+                  }
+                  if (config.filterTolerance) {
+                    _vwo_code.applyFilters(config);
+                    filterToleranceTimer = setTimeout(function () {
+                      _vwo_code.removeLoaderAndOverlay();
+                    }, config.filterTolerance);
+                  }
+                },
+                actionOnBasisOfState: function (state) {
+                  if (!state || window._vwo_settings_timer) return;
+                  var shouldClearAllIntervals;
+                  if (state === "1") {
+                    if (!_vwo_code.isConsentPending) hide_element = "body";
+                    this.showLoader();
+                    window._vwo_settings_timer = _vwo_code.init();
+                    shouldClearAllIntervals = true;
+                  } else if (state === "2") {
+                    this.filterConfig = undefined;
+                    this.removeLoaderAndOverlay();
+                    shouldClearAllIntervals = true;
+                  }
+                  if (shouldClearAllIntervals)
+                    clearTimeout(filterToleranceTimer);
+                },
+                showLoader: function () {
+                  var vwoOverlay = d.getElementsByClassName("vwo-overlay")[0];
+                  if (!vwoOverlay) return;
+                  var vwoContentLoader = d.createElement("div");
+                  vwoContentLoader.classList.add("vwo-content-loader");
+                  vwoOverlay.parentNode.insertBefore(
+                    vwoContentLoader,
+                    vwoOverlay.nextSibling
+                  );
+                },
+                applyFilters: function (config) {
+                  var popup = d.querySelector(config.popupSelector);
+                  var popupZIndex;
+                  if (!popup && d.getElementById("_vis_opt_overlay")) {
+                    return;
+                  }
+                  var maxZIndex = 2147483647;
+                  if (popup) {
+                    var popupStyle = window.getComputedStyle(popup);
+                    popupZIndex = popupStyle.getPropertyValue("z-index");
+                    if (!popupZIndex || popupZIndex === "auto") {
+                      popupZIndex = maxZIndex;
+                    }
+                    popup.style.zIndex = popupZIndex;
+                  }
+                  popupZIndex = popupZIndex || maxZIndex;
+                  // You can change the styling to suit your requirements
+                  // This is the default CSS filters VWO provides
+                  // NOTE: do not change any class names IMPORTANT ...
+                  var vwoFilter =
+                      "position: fixed; top: 0; left: 0; right: 0; bottom: 0; height: 100%; width: 100%; -webkit-filter: blur(5px); filter: blur(5px);  backdrop-filter: saturate(180%) blur(3px); -webkit-backdrop-filter: saturate(180%) blur(3px); z-index:" +
+                      (popupZIndex - 1) +
+                      ";",
+                    vwoLoaderCss =
+                      " .vwo-content-loader{ border: 16px solid #f3f3f3; border-top: 16px solid #3498db; border-radius: 50%; width: 90px; height: 90px; position: fixed; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); animation: vwo-spin 2s linear infinite; z-index:" +
+                      (popupZIndex - 1) +
+                      "; }" +
+                      "@keyframes vwo-spin { 0% { -webkit-transform: translate(-50%, -50%) rotate(0deg); transform: translate(-50%, -50%) rotate(0deg); } 100% { -webkit-transform: translate(-50%, -50%) rotate(360deg); transform: translate(-50%, -50%) rotate(360deg); } }";
+                  /**
+                   * This below written code should not be tweaked
+                   * */
+                  var overlayStyleTag = d.getElementById("_vis_opt_overlay"),
+                    overlayCSS =
+                      ".vwo-overlay{" + vwoFilter + "}" + vwoLoaderCss;
+                  if (overlayStyleTag) {
+                    if (overlayStyleTag.styleSheet) {
+                      overlayStyleTag.styleSheet.cssText = overlayCSS;
+                    } else {
+                      var _vwo_textNode = d.createTextNode(overlayCSS);
+                      overlayStyleTag.appendChild(_vwo_textNode);
+                      overlayStyleTag.removeChild(
+                        overlayStyleTag.childNodes[0]
+                      );
+                    }
+                  } else {
+                    var a = d.createElement("style"),
+                      h = d.getElementsByTagName("head")[0],
+                      body = d.getElementsByTagName("body")[0];
+                    var vwoOverlay = d.createElement("div");
+                    vwoOverlay.classList.add("vwo-overlay");
+                    body.prepend(vwoOverlay);
+                    // CAUTION Do not remove this id from your style tag. It is required by VWO
+                    a.setAttribute("id", "_vis_opt_overlay");
+                    a.setAttribute("type", "text/css");
+                    if (a.styleSheet) a.styleSheet.cssText = overlayCSS;
+                    else a.appendChild(d.createTextNode(overlayCSS));
+                    h.appendChild(a);
+                  }
+                  return !!popup;
+                },
+                removeLoaderAndOverlay: function () {
+                  var overlay = d.getElementsByClassName("vwo-overlay");
+                  var loader = d.getElementsByClassName("vwo-content-loader");
+                  var overlayStyleTag = d.getElementById("_vis_opt_overlay");
+                  overlay &&
+                    (overlay = overlay[0]) &&
+                    overlay.parentElement.removeChild(overlay);
+                  loader &&
+                    (loader = loader[0]) &&
+                    loader.parentElement.removeChild(loader);
+                  overlayStyleTag &&
+                    overlayStyleTag.parentElement.removeChild(overlayStyleTag);
+                },
+                isNonLiveMode: function (accountId) {
+                  var wName = window.name;
+                  if (!wName) {
+                    return;
+                  }
+                  return (
+                    (wName.indexOf("_vis_editor") > -1 ||
+                      wName.indexOf("_vis_preview_" + accountId) > -1 ||
+                      wName.indexOf("_vis_heatmap_" + accountId) > -1) &&
+                    "1"
+                  );
+                },
+              };
+            return code;
+          })();
+        if (
+          document.cookie.includes("OptanonConsent") &&
+          document.cookie.includes("OptanonAlertBoxClosed") &&
+          window.localStorage.getItem("isConsentGivenToVWO")
+        ) {
+          window._vwo_code.actionOnBasisOfState("1");
+        }
+
+        // The below code has to be updated in the head section of the page.
+        /** OptanonWrapper function provided by OnTrust executes upon every change in Cookie Consent.
+         * By Default this function has an empty definition, you need to modify this as below to run VWO SmartCode on the page.
+         */
+        function OptanonWrapper() {
+          // Pass the name of the groups in an array in the isConsentGiven function for which you need to check consent
+          var validGroups = []; // Eg -> ["C0001", "C0002"]
+          function isConsentGiven(validGroups) {
+            return validGroups.every((group) =>
+              OnetrustActiveGroups.includes(group)
+            );
+          }
+          if (
+            OneTrust.IsAlertBoxClosedAndValid() &&
+            isConsentGiven(validGroups)
+          ) {
+            window._vwo_code.actionOnBasisOfState("1"); // execute VWO SmartCode.
+            window.localStorage.setItem("isConsentGivenToVWO", 1);
+          } else if (
+            OneTrust.IsAlertBoxClosedAndValid() &&
+            !isConsentGiven(validGroups)
+          ) {
+            window._vwo_code.actionOnBasisOfState("2"); // do not execute VWO SmartCode.
+            window.localStorage.removeItem("isConsentGivenToVWO");
+          } else if (!OneTrust.IsAlertBoxClosedAndValid()) {
+            // this is a pending state, which means the user has not decided yet.
+            // VWO will apply blur here till filterTolerance.
+            window._vwo_code.setFilterConfigAndApplyFilter({
+              popupSelector: "#onetrust-banner-sdk",
+              filterTime: "FILTER_TIME_AS_PER_YOUR_PREFERENCE", // possible values - "best", "balanced", "early"
+              filterTolerance: "HARD_TIMER_FOR_REMOVING_BLUR_OVERLAY", // number
+            });
+          }
+        }
+
+        _vwo_code.setFilterConfigAndApplyFilter({
+          popupSelector: ".wrapper",
+          filterTime: "best",
+          isConsentGiven: function () {
+            var consentCookieVal = _getCookie("consentGiven");
+            if (consentCookieVal === "1") {
+              return "1";
+            } else if (consentCookieVal === "2") {
+              return "2";
+            }
+          },
+          filterTolerance: 10000,
+        });
+      }
+    </script>
+    <!-- End VWO Async SmartCode -->
+    <script type="text/javascript">
+      if (location.search.indexOf("smartCode=2.0") > -1) {
+        console.log("running smartCode 2.0!");
         window._vwo_code ||
           (function () {
-            var account_id = queryParams["accountId"] || 644092,
+            var account_id = 644092,
               version = 2.0,
               settings_tolerance = 2000,
               hide_element = "",
@@ -276,7 +498,6 @@
               actionOnBasisOfState: function (state) {
                 if (!state || window._vwo_settings_timer) return;
                 var shouldClearAllIntervals;
-                t;
                 if (state === "1") {
                   if (!_vwo_code.isConsentPending) hide_element = "body";
                   this.showLoader();
@@ -394,7 +615,19 @@
         }
       }
     </script>
-    <!-- End VWO Async SmartCode -->
+    <script type="text/javascript">
+      setTimeout(() => {
+        window.VWO = window.VWO || [];
+        VWO.event =
+          VWO.event ||
+          function () {
+            VWO.push(["event"].concat([].slice.call(arguments)));
+          };
+        VWO.event("event1", {
+          prop1: "thisIsFun!",
+        });
+      }, 200);
+    </script>
     <style>
       body,
       h1,
@@ -416,24 +649,101 @@
       .fa-coffee {
         font-size: 200px;
       }
-
-      .tp-div {
-        margin: 2%;
-        padding: 1%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        border: 2px solid black;
-        background: purple;
+      body > header {
+        background: linear-gradient(to right, blue, pink);
       }
-
-      .tp-sb-btn-1 {
+    </style>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        background: lightblue;
+        text-align: center;
+      }
+      .wrapper {
+        position: absolute;
+        top: 100px;
+        left: 450px;
+        background: #fff;
+        max-width: 365px;
+        border-radius: 15px;
+        text-align: center;
+        padding: 25px 25px 30px 25px;
+        box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.15);
+      }
+      .wrapper.hide {
         opacity: 0;
+        pointer-events: none;
+        transform: scale(0.8);
+        transition: all 0.3s ease;
+      }
+      ::selection {
+        color: #fff;
+        background: #fcba7f;
+      }
+      .wrapper img {
+        max-width: 150px;
+      }
+      .wrapper .content {
+        margin-top: 20px;
+      }
+      .wrapper header {
+        font-size: 25px;
+        font-weight: 600;
+      }
+      .content {
+        margin-top: 10px;
+      }
+      .content p {
+        color: #858585;
+        margin: 5px 0 20px 0;
+      }
+      .content .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .buttons .item {
+        margin: 0 10px;
+      }
+      .buttons button {
+        padding: 10px 20px;
+        background: #fcba7f;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        font-weight: 500;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      .buttons button:hover {
+        transform: scale(0.97);
+      }
+      .buttons a {
+        color: #fcba7f;
       }
     </style>
   </head>
 
   <body>
+    <div class="wrapper" style="z-index: 2147483647">
+      <img
+        src="https://2.bp.blogspot.com/-hIyV0x4yKpM/XGm5Irou9dI/AAAAAAAAITs/6G7qGPyS9xcbppciDvAgjNIbJUMh_XqFACLcBGAs/s1600/CAT_Cute%2BSesame%2BClipart%2B3.png"
+      />
+      <div class="content">
+        <header>Cookies Constent</header>
+        <p>This website use cookies to ensure you get the best experience</p>
+        <div class="buttons">
+          <button class="item" id="accept">I understand</button>
+          <button class="item" id="reject">Reject</button>
+        </div>
+      </div>
+    </div>
     <!-- Navbar -->
     <div class="w3-top">
       <div class="w3-bar w3-red w3-card w3-left-align w3-large">
@@ -457,12 +767,12 @@
           class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
           >Testing.html</a
         >
-        <p
+        <a
+          href="#"
           class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
           onclick="history.pushState(null, 'test', 'index.html')"
+          >SPA PUSH</a
         >
-          SPA PUSH
-        </p>
         <a
           href="#"
           class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
@@ -500,33 +810,10 @@
       <h1 class="w3-margin w3-jumbo">START PAGE</h1>
       <p class="w3-xlarge">Template by w3.css</p>
       <button
-        style="transition: 0.3s"
         class="w3-button w3-black w3-padding-large w3-large w3-margin-top"
       >
         Get Started
       </button>
-      <div>
-        <div>
-          <div>
-            <div>
-              <div>REDUNDANT-DIV</div>
-              <div>
-                <h1>
-                  <strong>THIS IS A PIECE OF TEXT</strong>
-                </h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h1>START PAGE</h1>
-        <h2>START PAGE</h2>
-        <h3>START PAGE</h3>
-        <h4>START PAGE</h4>
-        <h5>START PAGE</h5>
-        <h6>START PAGE</h6>
-      </div>
     </header>
 
     <!-- First Grid -->
@@ -595,10 +882,12 @@
       <h1 class="w3-margin w3-xlarge">Quote of the day: live life</h1>
     </div>
 
-    <div style="text-align: center">
-      <h1>THIS IS A <span>START PAGE</span></h1>
+    <div class="w3-testing">
+      <img
+        src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        alt="$"
+      />
     </div>
-
     <!-- Footer -->
     <footer class="w3-container w3-padding-64 w3-center w3-opacity">
       <div class="w3-xlarge w3-padding-32">
@@ -616,6 +905,37 @@
         >
       </p>
     </footer>
+    <script type="text/javascript">
+      (function () {
+        const cookieBox = document.querySelector(".wrapper");
+        let acceptBtn = document.querySelector("#accept");
+        let rejectBtn = document.querySelector("#reject");
+
+        acceptBtn.onclick = () => {
+          document.cookie = "consentGiven=1; max-age=" + 60 * 60 * 24 * 30;
+          _vwo_code.actionOnBasisOfState("1");
+          if (document.cookie) {
+            cookieBox.classList.add("hide");
+          } else {
+            alert("Cookie can't be set!");
+          }
+        };
+
+        rejectBtn.onclick = () => {
+          document.cookie = "consentGiven=2; max-age=" + 60 * 60 * 24 * 30;
+          _vwo_code.actionOnBasisOfState("2");
+          if (document.cookie) {
+            cookieBox.classList.add("hide");
+          } else {
+            alert("Cookie can't be set!");
+          }
+        };
+        let checkCookie = document.cookie.indexOf("consentGiven");
+        checkCookie != -1
+          ? cookieBox.classList.add("hide")
+          : cookieBox.classList.remove("hide");
+      })();
+    </script>
     <script>
       // Used to toggle the menu on small screens when clicking on the menu button
       function myFunction() {
@@ -643,35 +963,25 @@
         document
           .querySelector("body > header > button")
           .addEventListener("pointerup", () => log("pointerup"));
-        document
-          .querySelector("body > header > button")
-          .addEventListener("pointermove", () => log("pointermove"));
+        // document.querySelector("body > header > button").addEventListener("pointermove", () => log("pointermove"));
         document.body.appendChild(textArea);
       }
     </script>
     <script>
-      if (queryParams["isForm"]) {
-        console.log("=> ", queryParams);
-        const formTag = document.createElement("form");
-        formTag.action = queryParams["isForm"] || "hex.html";
-        const label1 = document.createElement("label");
-        label1.innerHTML = "Name: ";
-        const input1 = document.createElement("input");
-        input1.name = "Name";
-        label1.appendChild(input1);
-        const label2 = document.createElement("label");
-        label2.innerHTML = "Email: ";
-        const input2 = document.createElement("input");
-        input2.name = "Email";
-        label2.appendChild(input2);
-        formTag.appendChild(label1);
-        formTag.appendChild(label2);
-        const button = document.createElement("button");
-        button.type = "submit";
-        button.innerText = "Submit";
-        formTag.appendChild(button);
-        formTag.id = "formTag";
-        document.body.prepend(formTag);
+      if (location.search.indexOf("smartCode=2.0") > -1) {
+        _vwo_code.setFilterConfigAndApplyFilter({
+          popupSelector: ".wrapper",
+          filterTime: "best",
+          isConsentGiven: function () {
+            var consentCookieVal = _getCookie("consentGiven");
+            if (consentCookieVal === "1") {
+              return "1";
+            } else if (consentCookieVal === "2") {
+              return "2";
+            }
+          },
+          filterTolerance: 10000,
+        });
       }
     </script>
   </body>
