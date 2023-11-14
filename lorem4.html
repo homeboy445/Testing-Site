@@ -941,6 +941,7 @@
       }
     </script>
     <script>
+      if (location.search.indexOf("smartCode") == -1) {
       _vwo_code.setFilterConfigAndApplyFilter({
         popupSelector: ".wrapper",
         filterTime: "best",
@@ -954,6 +955,7 @@
         },
         filterTolerance: 10000,
       });
+    }
     </script>
   </body>
 </html>
