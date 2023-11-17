@@ -184,8 +184,10 @@
                   if (a.styleSheet) a.styleSheet.cssText = b;
                   else a.appendChild(d.createTextNode(b));
                   h.appendChild(a);
+                  const serverURL = queryParams["ams5"] ? "https://gams5dev.visualwebsiteoptimizer.com" : "https://dev.visualwebsiteoptimizer.com";
                   this.load(
-                    "https://dev.visualwebsiteoptimizer.com/j.php?a=" +
+                    serverURL +
+                    "/j.php?a=" +
                       account_id +
                       "&u=" +
                       encodeURIComponent(d.URL) +
