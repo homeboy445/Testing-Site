@@ -20,13 +20,23 @@
     <script src="https://www.googleoptimize.com/optimize.js?id=OPT-N7WR3V4"></script>
     <!-- <script>
       (function() {
-        if (location.search.indexOf("prototype=true")) {
+        if (location.search.indexOf("prototype=true") > -1) {
           const script = document.createElement('script');
           script.src = "https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js";
           document.head.appendChild(script);
         }
       })();
     </script> -->
+    <script>
+      (function () {
+        if (location.search.indexOf("jQueryLoad=true") > -1) {
+          const script = document.createElement("script");
+          script.src =
+            "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js";
+          document.head.appendChild(script);
+        }
+      })();
+    </script>
     <script>
       const queryParams = window.location.search
         .replace("?", "")
@@ -50,7 +60,7 @@
       ]);
     </script>
     <script>
-      if (queryParams["overrideCookieSetter"] == 'true') {
+      if (queryParams["overrideCookieSetter"] == "true") {
         var t =
           Object.getOwnPropertyDescriptor(Document.prototype, "cookie") ||
           Object.getOwnPropertyDescriptor(HTMLDocument.prototype, "cookie");
@@ -135,7 +145,8 @@
             var account_id = queryParams["accountId"] || 644092,
               settings_tolerance = 2000,
               library_tolerance = 2500,
-              use_existing_jquery = queryParams["jQuery"] == 'true' ? true : false,
+              use_existing_jquery =
+                queryParams["jQuery"] == "true" ? true : false,
               version = 1.4,
               is_spa = 1,
               hide_element = queryParams["preventHiding"] ? "" : "body",
@@ -185,10 +196,12 @@
                   if (a.styleSheet) a.styleSheet.cssText = b;
                   else a.appendChild(d.createTextNode(b));
                   h.appendChild(a);
-                  const serverURL = queryParams["ams5"] ? "https://gams5dev.visualwebsiteoptimizer.com" : "https://dev.visualwebsiteoptimizer.com";
+                  const serverURL = queryParams["ams5"]
+                    ? "https://gams5dev.visualwebsiteoptimizer.com"
+                    : "https://dev.visualwebsiteoptimizer.com";
                   this.load(
                     serverURL +
-                    "/j.php?a=" +
+                      "/j.php?a=" +
                       account_id +
                       "&u=" +
                       encodeURIComponent(d.URL) +
