@@ -28,13 +28,14 @@
       })();
     </script> -->
     <script>
-      const page_url = window.location.href;
-      const queryParams = {};
-      page_url
-        .substring(page_url.lastIndexOf("?") + 1)
+      const queryParams = window.location.search
+        .replace("?", "")
         .split("&")
-        .map((i) => i.split("="))
-        .map((param) => (queryParams[param[0]] = param[1]));
+        .reduce((prev, cur) => {
+          const [key, val] = cur.split("=");
+          prev[key] = val;
+          return prev;
+        }, {});
     </script>
     <script>
       window.VWO = window.VWO || [];
@@ -49,7 +50,7 @@
       ]);
     </script>
     <script>
-      if (queryParams["overrideCookieSetter"]) {
+      if (queryParams["overrideCookieSetter"] == 'true') {
         var t =
           Object.getOwnPropertyDescriptor(Document.prototype, "cookie") ||
           Object.getOwnPropertyDescriptor(HTMLDocument.prototype, "cookie");
@@ -134,7 +135,7 @@
             var account_id = queryParams["accountId"] || 644092,
               settings_tolerance = 2000,
               library_tolerance = 2500,
-              use_existing_jquery = false,
+              use_existing_jquery = queryParams["jQuery"] == 'true' ? true : false,
               version = 1.4,
               is_spa = 1,
               hide_element = queryParams["preventHiding"] ? "" : "body",
