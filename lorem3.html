@@ -24,6 +24,12 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"
+      integrity="sha512-synHs+rLg2WDVE9U0oHVJURDCiqft60GcWOW7tXySy8oIr0Hjl3K9gv7Bq/gSj4NDVpc5vmsNkMGGJ6t2VpUMA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script>
       window.VWO = window.VWO || [];
       VWO.event =
@@ -53,26 +59,40 @@
       href="https://unpkg.com/flickity@2/dist/flickity.min.css"
     />
     <script>
-      VWO.event = VWO.event || function () {VWO.push(['event'].concat([].slice.call(arguments)))};
-      VWO.event('event1', {
-        'prop1': Math.abs(Math.random() * 100)
+      VWO.event =
+        VWO.event ||
+        function () {
+          VWO.push(["event"].concat([].slice.call(arguments)));
+        };
+      VWO.event("event1", {
+        prop1: Math.abs(Math.random() * 100),
       });
     </script>
     <script>
-      VWO.visitor = VWO.visitor || function () {VWO.push(['visitor'].concat([].slice.call(arguments)))};
+      VWO.visitor =
+        VWO.visitor ||
+        function () {
+          VWO.push(["visitor"].concat([].slice.call(arguments)));
+        };
       VWO.visitor({
-        'prop1': Math.abs(Math.random() * 100)
+        prop1: Math.abs(Math.random() * 100),
       });
     </script>
     <script>
-      window.VWO.push(["onVariationApplied", (x) => {
-        console.log("vAppl: ", x);
-      }]);
+      window.VWO.push([
+        "onVariationApplied",
+        (x) => {
+          console.log("vAppl: ", x);
+        },
+      ]);
     </script>
     <script>
-      window.VWO.push(["onEventReceive", (d) => {
-        console.log("onEvR: ", d);
-      }]);
+      window.VWO.push([
+        "onEventReceive",
+        (d) => {
+          console.log("onEvR: ", d);
+        },
+      ]);
     </script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript" id="vwoCode">
