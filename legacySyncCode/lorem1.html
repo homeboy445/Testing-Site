@@ -37,7 +37,8 @@
         t: 100,
       };
       use_existing_jquery = false;
-      var _vis_opt_account_id = 644092;
+      const urlObject = new URL(location.href);
+      var _vis_opt_account_id = urlObject.searchParams.get("accountId") || 644092;
       var _vis_opt_protocol =
         "https:" == document.location.protocol ? "https://" : "http://";
       document.write(
