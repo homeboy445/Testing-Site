@@ -214,8 +214,29 @@
                   return settings_timer;
                 },
               };
-            window._vwo_settings_timer =
+            const cb = () => {
+              window._vwo_settings_timer =
               !queryParams["googleOpt"] && code.init();
+            };
+            if (!queryParams["async"]) {
+              cb();
+            } else {
+              window.addEventListener("DOMContentLoaded", () => {
+                if (document.cookie.indexOf("loaded=true") > -1) {
+                  cb();
+                } else {
+                  const ele = document.querySelector("body > header");
+                  const btn = document.createElement("button");
+                  button.innerText = "LoadSmartCode";
+                  button.style.transform = "scale(1.5)";
+                  button.onclick = () => {
+                    cb();
+                    document.cookie = "loaded=true;";
+                  };
+                  ele.appendChild(button);
+                }
+              });
+            }
             return code;
           })();
       }
