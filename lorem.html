@@ -121,6 +121,11 @@
         };
       })();
     </script>
+    <script>
+      document.addEventListener("readystatechange", function() {
+        console.log("## ", document.readyState, " on `readystatechange`!");
+      });
+    </script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript">
       window.queryParams = queryParams;
