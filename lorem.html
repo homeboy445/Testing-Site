@@ -121,14 +121,6 @@
         };
       })();
     </script>
-    <script>
-      document.addEventListener("readystatechange", function() {
-        console.log("## ", document.readyState, " on `readystatechange`!");
-        if (document.readyState == "complete") {
-          document.querySelector("body > header").innerHTML += "<h1 style='background: yellow; color: green;'>DOM.readyState is complete!</h1>";
-        }
-      });
-    </script>
     <!-- Start VWO Async SmartCode -->
     <script type="text/javascript">
       window.queryParams = queryParams;
