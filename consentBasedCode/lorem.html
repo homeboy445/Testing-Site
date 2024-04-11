@@ -235,7 +235,7 @@
                    * */
                   var overlayStyleTag = d.getElementById("_vis_opt_overlay"),
                     overlayCSS =
-                      ".vwo-overlay{" + vwoFilter + "}" + vwoLoaderCss;
+                      config.preventBlur ? "" : ".vwo-overlay {" + vwoFilter + "}" + vwoLoaderCss;
                   if (overlayStyleTag) {
                     if (overlayStyleTag.styleSheet) {
                       overlayStyleTag.styleSheet.cssText = overlayCSS;
@@ -974,6 +974,7 @@
         _vwo_code.setFilterConfigAndApplyFilter({
           popupSelector: ".wrapper",
           filterTime: "best",
+          preventBlur: location.search.indexOf("_disable_blue_=true") > -1,
           isConsentGiven: function () {
             var consentCookieVal = _getCookie("consentGiven");
             if (consentCookieVal === "1") {
