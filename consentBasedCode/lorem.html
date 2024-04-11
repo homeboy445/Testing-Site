@@ -974,7 +974,7 @@
         _vwo_code.setFilterConfigAndApplyFilter({
           popupSelector: ".wrapper",
           filterTime: "best",
-          preventBlur: location.search.indexOf("_disable_blue_=true") > -1,
+          preventBlur: location.search.indexOf("_disable_blue_=true") > 1,
           isConsentGiven: function () {
             var consentCookieVal = _getCookie("consentGiven");
             if (consentCookieVal === "1") {
