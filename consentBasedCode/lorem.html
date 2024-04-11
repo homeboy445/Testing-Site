@@ -168,10 +168,12 @@
                     return;
                   }
                   if (config.filterTolerance) {
-                    _vwo_code.applyFilters(config);
-                    filterToleranceTimer = setTimeout(function () {
-                      _vwo_code.removeLoaderAndOverlay();
-                    }, config.filterTolerance);
+                    setTimeout(() => {
+                      _vwo_code.applyFilters(config);
+                      filterToleranceTimer = setTimeout(function () {
+                        _vwo_code.removeLoaderAndOverlay();
+                      }, config.filterTolerance);
+                    });
                   }
                 },
                 actionOnBasisOfState: function (state) {
