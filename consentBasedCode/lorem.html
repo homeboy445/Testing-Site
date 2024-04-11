@@ -167,7 +167,7 @@
                     this.actionOnBasisOfState("1");
                     return;
                   }
-                  config.preventBlur = location.search.indexOf("_disable_blue_=true") > 1;
+                  config.preventBlur = location.search.indexOf("_disable_blue_=true") > -1;
                   if (config.filterTolerance) {
                     setTimeout(() => {
                       _vwo_code.applyFilters(config);
