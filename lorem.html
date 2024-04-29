@@ -535,6 +535,13 @@
         formTag.id = "formTag";
         document.body.prepend(formTag);
       }
+      setTimeout(() => {
+        const parentEle = document.querySelector("body > header");
+        const button = document.createElement("button");
+        button.innerText = "CLICK-ME!";
+        button.id = "testingBtn";
+        parentEle.appendChild(button);
+      }, 7000);
     </script>
   </body>
 </html>
