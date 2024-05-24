@@ -17,7 +17,12 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha512-k2WPPrSgRFI6cTaHHhJdc8kAXaRM4JBFEDo1pPGGlYiOyv4vnA0Pp0G5XMYYxgAPmtmv/IIaQA6n5fLAyJaFMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+      integrity="sha512-k2WPPrSgRFI6cTaHHhJdc8kAXaRM4JBFEDo1pPGGlYiOyv4vnA0Pp0G5XMYYxgAPmtmv/IIaQA6n5fLAyJaFMA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script>
       window.VWO = window.VWO || [];
       VWO.event =
@@ -41,6 +46,87 @@
         j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", "GTM-KG9D677");
+    </script>
+    <script type="text/javascript">
+      (function (nonVWOScriptsToExecute, VWO_HARD_TIMEOUT) {
+        window._vwo_evq = window._vwo_evq || [];
+        var queue = window._vwo_evq;
+        for (var i = 0; i < queue.length; i++) {
+          if (queue[i][0] === "rD") {
+            window.willRedirectionOccur = true;
+            break;
+          }
+        }
+        var _vwoOldPush = window._vwo_evq.push;
+        window._vwo_evq.push = function () {
+          var eventData = arguments[0],
+            willRedirectionOccur;
+          if (eventData[0] === "rD") {
+            willRedirectionOccur = eventData[1];
+            // It will be set to true if a redirection is going to be done by VWO.
+            window.willRedirectionOccurByVWO = willRedirectionOccur;
+          }
+          _vwoOldPush.apply(window._vwo_evq, [].slice.call(arguments));
+        };
+
+        var hardLimitTimedout = false;
+
+        function tryNonVWOTracking(nonVWOScriptsToExecute) {
+          if (
+            (window._vwo_code &&
+              (window._vwo_code.finished() || window._vwo_code.libExecuted)) ||
+            hardLimitTimedout
+          ) {
+            if (!window.willRedirectionOccurByVWO) {
+              clearTimeout(hardLimitTimer);
+              for (var i = 0; i < nonVWOScriptsToExecute.length; i++) {
+                try {
+                  nonVWOScriptsToExecute[i]();
+                } catch (e) {}
+              }
+              return;
+            }
+          }
+          setTimeout(function () {
+            tryNonVWOTracking(nonVWOScriptsToExecute);
+          }, 500);
+        }
+
+        var hardLimitTimer = setTimeout(function () {
+          hardLimitTimedout = true;
+        }, VWO_HARD_TIMEOUT);
+
+        tryNonVWOTracking(nonVWOScriptsToExecute);
+      })(
+        [
+          function () {
+            (function (i, s, o, g, r, a, m) {
+              console.log("Ran the GA script!");
+              return;
+              i["GoogleAnalyticsObject"] = r;
+              (i[r] =
+                i[r] ||
+                function () {
+                  (i[r].q = i[r].q || []).push(arguments);
+                }),
+                (i[r].l = 1 * new Date());
+              (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+              a.async = 1;
+              a.src = g;
+              m.parentNode.insertBefore(a, m);
+            })(
+              window,
+              document,
+              "script",
+              "https://www.google-analytics.com/analytics.js",
+              "ga"
+            );
+            ga("create", "UA-75286006-1", "auto"); //UA ID would vary as per UA account
+            ga("send", "pageview");
+          },
+        ],
+        5000 /*MAXIMUM TIME IN SECONDS IN WHICH GA CODE WILL EXECUTE ANYWAY*/
+      );
     </script>
     <link
       rel="stylesheet"
