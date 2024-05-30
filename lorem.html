@@ -28,6 +28,28 @@
       })();
     </script> -->
     <script>
+      const queryParams = window.location.search
+        .replace("?", "")
+        .split("&")
+        .reduce((prev, cur) => {
+          const [key, val] = cur.split("=");
+          prev[key] = val;
+          return prev;
+        }, {});
+    </script>
+    <script>
+      (function () {
+          if (queryParams["user_name"]) {
+            // Do not change anything in the following two lines
+            window.VWO = window.VWO || [];
+            VWO.visitor = VWO.visitor || function () {VWO.push(["visitor"].concat([].slice.call(arguments)))};
+  
+            // Replace "<text_value>" with your actual attribute value
+            VWO.visitor({ "user_name": queryParams["user_name"] });
+          }
+      })();
+    </script>
+    <script>
       (function () {
         if (location.search.indexOf("jQueryLoad=true") > -1) {
           const script = document.createElement("script");
@@ -38,16 +60,6 @@
       })();
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-    <script>
-      const queryParams = window.location.search
-        .replace("?", "")
-        .split("&")
-        .reduce((prev, cur) => {
-          const [key, val] = cur.split("=");
-          prev[key] = val;
-          return prev;
-        }, {});
-    </script>
     <script>
       window.VWO = window.VWO || [];
       VWO.push([
