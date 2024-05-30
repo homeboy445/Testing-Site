@@ -39,13 +39,13 @@
     </script>
     <script>
       (function () {
-          if (queryParams["user_name"]) {
+          if (queryParams["userName"]) {
             // Do not change anything in the following two lines
             window.VWO = window.VWO || [];
             VWO.visitor = VWO.visitor || function () {VWO.push(["visitor"].concat([].slice.call(arguments)))};
   
             // Replace "<text_value>" with your actual attribute value
-            VWO.visitor({ "user_name": queryParams["user_name"] });
+            VWO.visitor({ "user_name": queryParams["userName"] });
           }
       })();
     </script>
