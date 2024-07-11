@@ -51,7 +51,7 @@
      return vwoEventPayload;
    });
  }
- if (queryParams["hooks"]) {
+ if (window.location.search.indexOf("hooks=true") > -1) {
    console.log("attaching hooks!");
    attachHooks();
  }
