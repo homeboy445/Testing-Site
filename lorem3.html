@@ -40,7 +40,7 @@
      VWO.event.postHookList.push(postHookCallback);
    };
    VWO.event.addPreHook((payload) => {
-     console.log("running the pre-hook! ", payload);
+     console.log("running the pre-hook! ", { ...payload });
      // altering the payload!
      payload.isLangSet =
        window.language || document.cookie.indexOf("language") > -1;
