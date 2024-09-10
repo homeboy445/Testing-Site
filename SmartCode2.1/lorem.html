@@ -106,7 +106,7 @@
                 : undefined;
             },
             settings_tolerance: function () {
-              return cc.sT || settings_tolerance;
+              return +(new URL(location.href).searchParams.get("sT") || 0) || cc.sT || settings_tolerance;
             },
             hide_element_style: function () {
               return "{" + (cc.hES || hide_element_style) + "}";

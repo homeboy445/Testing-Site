@@ -24,6 +24,50 @@
       referrerpolicy="no-referrer"
     ></script>
     <script>
+       function attachHooks() {
+   window.VWO = window.VWO || [];
+   VWO.event =
+     VWO.event ||
+     function () {
+       VWO.push(["event"].concat([].slice.call(arguments)));
+     };
+ const currencyConvertor = (amount) => {
+     return amount * 88; // hard coded function!
+ }
+   VWO.event.addPreHook = function (preHookCallback) {
+     VWO.event.preHookList = VWO.event.preHookList || [];
+     VWO.event.preHookList.push(preHookCallback);
+   };
+   VWO.event.addPostHook = function (postHookCallback) {
+     VWO.event.postHookList = VWO.event.postHookList || [];
+     VWO.event.postHookList.push(postHookCallback);
+   };
+VWO.event.addPreHook((payload) => {
+     if (payload.d.event.name.includes("revenue") && payload.d.event?.props?.amount) {
+         console.log("converting currency!");
+         payload.d.event.props.amount = currencyConvertor(payload.d.event?.props?.amount);
+     }
+     return payload;
+ });
+   VWO.event.addPreHook((payload) => {
+     console.log("running the pre-hook! ", { ...payload });
+     // altering the payload!
+     payload.isLangSet =
+       window.language || document.cookie.indexOf("language") > -1;
+     return payload;
+   });
+   VWO.event.addPostHook(function (vwoEventPayload) {
+     console.log("running the post-hook! ", vwoEventPayload);
+     return vwoEventPayload;
+   });
+ }
+ if (window.location.search.indexOf("hooks=true") > -1) {
+   console.log("attaching hooks!");
+   attachHooks();
+ }
+
+    </script>
+    <script>
       window.VWO = window.VWO || [];
       VWO.event =
         VWO.event ||

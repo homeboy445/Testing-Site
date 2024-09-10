@@ -67,7 +67,7 @@
         {
           storage: {
             strategy: "both", // ls | cookie | both; default: both
-            backwardCompatible: true, // default: true
+            backwardCompatible: location.search.includes("backward=false") ? false : true, // default: true
           },
         },
       ]);
