@@ -187,6 +187,11 @@ VWO.event.addPreHook((payload) => {
       });
     </script>
     <script>
+      window.addEventListener("vwoInitComplete", (e) => {
+        console.log("VWO has successfully loaded! ", e);
+      });
+    </script>
+    <script>
       VWO.visitor =
         VWO.visitor ||
         function () {
