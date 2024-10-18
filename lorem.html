@@ -255,36 +255,45 @@
       }
     </script>
     <script type='text/javascript' id="evRedirectScript">
-      (function () {
-        // Adding this inside an IIFE to make the scope private!
-        let isGATagTriggeredByVWO = false;
-        // This will load GA tag which are to supposed be configured on this trigger
-        function triggerGATag() {
-          if (isGATagTriggeredByVWO) return;
-          window.dataLayer.push({ event: "vwoNoRedirect" });
-          isGATagTriggeredByVWO = true;
-        }
-        // Load GA in case VWO is taking more time than expected
-        setTimeout(() => {
-          triggerGATag();
-          clearInterval(interval);
-        }, 5000);
-        // Detect VWO timeout and load GA if it has timed out
-        var interval = setInterval(() => {
-          if (!window._vwo_code.sT && !window._vwo_code.lt) return;
-          triggerGATag();
-          clearInterval(interval);
-        }, 500);
-        // Listen to VWO redirect status event
-        window.VWO.push([
-          "onSplitRedirectionDecided",
-          function (redirectStatus) {
-            // This will denote that VWO redirection is not going to happen
-            if (redirectStatus !== -1) return;
-            triggerGATag();
-          },
-        ]);
-    })();
+(function () {
+  let isGATagTriggered = false;
+  const TIMEOUT = 5000;
+  const CHECK_INTERVAL = 500;
+
+  function triggerGATag() {
+    if (isGATagTriggered) return;
+    window.dataLayer.push({ event: "vwoNoRedirect" });
+    isGATagTriggered = true;
+  }
+
+  function checkVWOStatus() {
+    const isVWOExecFinished = (window._vwo_code && window._vwo_code.finished()) || window.vwo_libExecuted;
+    if (isVWOExecFinished && !window.willRedirectionOccurByVWO) {
+      triggerGATag();
+      clearInterval(intervalId);
+    }
+  }
+
+  const timeoutId = setTimeout(() => {
+    triggerGATag();
+    clearInterval(intervalId);
+  }, TIMEOUT);
+
+  const intervalId = setInterval(checkVWOStatus, CHECK_INTERVAL);
+
+  window.VWO.push([
+    "onSplitRedirectionDecided",
+    function (redirectStatus) {
+      if (!redirectStatus) {
+        triggerGATag();
+      } else {
+        window.willRedirectionOccurByVWO = true;
+      }
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    },
+  ]);
+})();
     </script>
     <!-- End VWO Async SmartCode -->
     <style>
