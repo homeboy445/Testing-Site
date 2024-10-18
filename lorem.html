@@ -261,8 +261,13 @@
           () => (isHardTimeoutReached = true),
           VWO_HARD_TIMEOUT
         );
-      
+
+        let exec = false;
         const executeNonVWOScripts = () => {
+          if (exec) {
+            return;
+          }
+          exec = true;
           clearTimeout(hardTimeoutTimer);
           nonVWOScriptsToExecute.forEach((script) => {
             try {
@@ -304,7 +309,7 @@
         [
           () => {
             window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({ event: "vwoNotRedirect" });
+            window.dataLayer.push({ event: "vwoNoRedirect" });
           },
         ],
         5000
