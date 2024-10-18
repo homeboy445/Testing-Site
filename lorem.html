@@ -255,65 +255,36 @@
       }
     </script>
     <script type='text/javascript' id="evRedirectScript">
-      ((nonVWOScriptsToExecute, VWO_HARD_TIMEOUT) => {
-        let isHardTimeoutReached = false;
-        const hardTimeoutTimer = setTimeout(
-          () => (isHardTimeoutReached = true),
-          VWO_HARD_TIMEOUT
-        );
-
-        let exec = false;
-        const executeNonVWOScripts = () => {
-          if (exec) {
-            return;
-          }
-          exec = true;
-          clearTimeout(hardTimeoutTimer);
-          nonVWOScriptsToExecute.forEach((script) => {
-            try {
-              script();
-            } catch (e) {
-              console.error("Error executing non-VWO script:", e);
-            }
-          });
-        };
-      
+      (function () {
+        // Adding this inside an IIFE to make the scope private!
+        let isGATagTriggeredByVWO = false;
+        // This will load GA tag which are to supposed be configured on this trigger
+        function triggerGATag() {
+          if (isGATagTriggeredByVWO) return;
+          window.dataLayer.push({ event: "vwoNoRedirect" });
+          isGATagTriggeredByVWO = true;
+        }
+        // Load GA in case VWO is taking more time than expected
+        setTimeout(() => {
+          triggerGATag();
+          clearInterval(interval);
+        }, 5000);
+        // Detect VWO timeout and load GA if it has timed out
+        var interval = setInterval(() => {
+          if (!window._vwo_code.sT && !window._vwo_code.lt) return;
+          triggerGATag();
+          clearInterval(interval);
+        }, 500);
+        // Listen to VWO redirect status event
         window.VWO.push([
-          "onVWORedirectDecision",
-          (decisionState) => {
-            if (decisionState === false) {
-              clearTimeout(hardTimeoutTimer);
-              executeNonVWOScripts();
-            }
-            window.willRedirectionOccurByVWO = decisionState;
+          "onSplitRedirectionDecided",
+          function (redirectStatus) {
+            // This will denote that VWO redirection is not going to happen
+            if (redirectStatus !== -1) return;
+            triggerGATag();
           },
         ]);
-      
-        const vwoCode = window._vwo_code;
-        const tryNonVWOTracking = () => {
-          if (
-            (vwoCode && (vwoCode.finished() || vwoCode.libExecuted)) ||
-            window.vwo_libExecuted ||
-            isHardTimeoutReached
-          ) {
-            if (!window.willRedirectionOccurByVWO) {
-              executeNonVWOScripts();
-              return;
-            }
-          }
-          setTimeout(tryNonVWOTracking, 100);
-        };
-      
-        tryNonVWOTracking();
-      })(
-        [
-          () => {
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({ event: "vwoNoRedirect" });
-          },
-        ],
-        5000
-      );
+    })();
     </script>
     <!-- End VWO Async SmartCode -->
     <style>
