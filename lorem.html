@@ -254,62 +254,61 @@
           })();
       }
     </script>
-    <script type='text/javascript'>
+    <script type='text/javascript' id="evRedirectScript">
       ((nonVWOScriptsToExecute, VWO_HARD_TIMEOUT) => {
-          let isHardTimeoutReached = false;
-          const hardTimeoutTimer = setTimeout(
-            () => (isHardTimeoutReached = true),
-            VWO_HARD_TIMEOUT
-          );
-        
-          const executeNonVWOScripts = () => {
-            clearTimeout(hardLimitTimer);
-            nonVWOScriptsToExecute.forEach((script) => {
-              try {
-                script();
-              } catch (e) {
-                console.error("Error executing non-VWO script:", e);
-              }
-            });
-          };
-        
-          window.VWO.push([
-            "redirectDecision",
-            (decisionState) => {
-              if (decisionState === false) {
-                clearTimeout(hardTimeoutTimer);
-                executeNonVWOScripts();
-              }
-              window.willRedirectionOccurByVWO = decisionState;
-            },
-          ]);
-        
-          const vwoCode = window._vwo_code;
-          const tryNonVWOTracking = () => {
-            if (
-              (vwoCode && (vwoCode.finished() || vwoCode.libExecuted)) ||
-              window.vwo_libExecuted ||
-              isHardTimeoutReached
-            ) {
-              if (!window.willRedirectionOccurByVWO) {
-                executeNonVWOScripts();
-                return;
-              }
+        let isHardTimeoutReached = false;
+        const hardTimeoutTimer = setTimeout(
+          () => (isHardTimeoutReached = true),
+          VWO_HARD_TIMEOUT
+        );
+      
+        const executeNonVWOScripts = () => {
+          clearTimeout(hardTimeoutTimer);
+          nonVWOScriptsToExecute.forEach((script) => {
+            try {
+              script();
+            } catch (e) {
+              console.error("Error executing non-VWO script:", e);
             }
-            setTimeout(tryNonVWOTracking, 100);
-          };
-        
-          tryNonVWOTracking();
+          });
+        };
+      
+        window.VWO.push([
+          "redirectDecision",
+          (decisionState) => {
+            if (decisionState === false) {
+              clearTimeout(hardTimeoutTimer);
+              executeNonVWOScripts();
+            }
+            window.willRedirectionOccurByVWO = decisionState;
+          },
+        ]);
+      
+        const vwoCode = window._vwo_code;
+        const tryNonVWOTracking = () => {
+          if (
+            (vwoCode && (vwoCode.finished() || vwoCode.libExecuted)) ||
+            window.vwo_libExecuted ||
+            isHardTimeoutReached
+          ) {
+            if (!window.willRedirectionOccurByVWO) {
+              executeNonVWOScripts();
+              return;
+            }
+          }
+          setTimeout(tryNonVWOTracking, 100);
+        };
+      
+        tryNonVWOTracking();
       })(
-      [
-        () => {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ event: "vwoNotRedirect" });
-          console.log("Fired the GTM event -> `vwoNotRedirect`!");
-        },
-      ],
-      5000
-    );
+        [
+          () => {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: "vwoNotRedirect" });
+          },
+        ],
+        5000
+      );
     </script>
     <!-- End VWO Async SmartCode -->
     <style>
