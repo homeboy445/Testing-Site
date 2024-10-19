@@ -257,32 +257,26 @@
     <script type='text/javascript' id="evRedirectScript">
         (function () {
           let isGATagTriggered = false;
-          const TIMEOUT = 5000;
-          const CHECK_INTERVAL = 500;
-          let timeoutId, intervalId;
-        
-          const clearTimers = () => {
-            clearTimeout(timeoutId);
-            clearInterval(intervalId);
-          }
+          const CHECK_INTERVAL = 100;
+          let intervalId;
         
           function triggerGATag() {
             if (isGATagTriggered) return;
             window.dataLayer.push({ event: "vwoNoRedirect" });
             isGATagTriggered = true;
-            clearTimers();
           }
         
           function checkVWOStatus() {
             const isVWOExecFinished =
               (window._vwo_code && window._vwo_code.finished()) ||
               window.vwo_libExecuted;
-            if (isVWOExecFinished && !window.willRedirectionOccurByVWO) {
-              triggerGATag();
+            if (isVWOExecFinished) {
+              if (!window.willRedirectionOccurByVWO) {
+                triggerGATag();
+              }
+              clearInterval(intervalId);
             }
           }
-        
-          timeoutId = setTimeout(triggerGATag, TIMEOUT);
         
           intervalId = setInterval(checkVWOStatus, CHECK_INTERVAL);
         
@@ -294,7 +288,7 @@
               } else {
                 window.willRedirectionOccurByVWO = true;
               }
-              clearTimers();
+              clearInterval(intervalId);
             },
           ]);
         })();
