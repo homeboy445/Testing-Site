@@ -268,7 +268,8 @@
           const checkAndTrigger = () => {
             if (vwoGA.isTriggered) return;
             // VWO SmartCode timed out
-            if ((vwoCode && (vwoCode.sT || vwoCode.lT || vwoCode.finish())) || (performance.now() - vwoGA.startTime >= 5000)) {
+            const elapsedTime = ((performance.now() - vwoGA.startTime) / 1000);
+            if ((vwoCode && (vwoCode.sT || vwoCode.lT || vwoCode.finish())) || (elapsedTime >= 5000)) {
               if (!window.willRedirectionOccurByVWO) {
                 triggerGATag();
               }
