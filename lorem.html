@@ -257,22 +257,28 @@
     <script type='text/javascript' id="evRedirectScript">
 // IIFE implemented to avoid variable scope issues
 (function () {
-  var vwoGA = { isTriggered: false, startTime: performance.now(), willRedirectionOccurByVWO: false };
-  // This will load tags that are configured on this trigger which should be GA tags
+  var vwoGA = {
+    isTriggered: false,
+    startTime: performance.now(),
+    isRedirecting: false,
+  };
+  // This will load tags that are configured on this trigger which should be GA tags!
   function triggerGATag() {
     if (vwoGA.isTriggered) return;
+    window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({ event: "vwoNoRedirect" });
     vwoGA.isTriggered = true;
   }
   const vwoCode = window._vwo_code;
   const checkAndTrigger = () => {
-    if (vwoGA.isTriggered) return;
+    if (vwoGA.isTriggered || vwoGA.isRedirecting) return;
     // VWO SmartCode timed out
-    const elapsedTime = ((performance.now() - vwoGA.startTime) / 1000);
-    if ((vwoCode && (vwoCode.sT || vwoCode.lT || vwoCode.finished())) || (elapsedTime >= 5000)) {
-      if (!vwoGA.willRedirectionOccurByVWO) {
-        triggerGATag();
-      }
+    const elapsedTime = (performance.now() - vwoGA.startTime) / 1000;
+    if (
+      (vwoCode && (vwoCode.sT || vwoCode.lT || vwoCode.finished())) ||
+      elapsedTime >= 5000
+    ) {
+      triggerGATag();
       return;
     }
     requestAnimationFrame(checkAndTrigger);
@@ -280,11 +286,12 @@
   // Fallback if SmartCode is not working as expected
   requestAnimationFrame(checkAndTrigger);
   // Listen to VWO redirect status event
+  window.VWO = window.VWO || [];
   window.VWO.push([
     "onSplitRedirectionDecided",
     function (data) {
-      if (data.isRedirecting) {
-        vwoGA.willRedirectionOccurByVWO = true;
+      if (data && data.isRedirecting) {
+        vwoGA.isRedirecting = true;
         return;
       }
       triggerGATag();
