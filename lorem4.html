@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>W3.CSS Template</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"
+      integrity="sha512-k2WPPrSgRFI6cTaHHhJdc8kAXaRM4JBFEDo1pPGGlYiOyv4vnA0Pp0G5XMYYxgAPmtmv/IIaQA6n5fLAyJaFMA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+       function attachHooks() {
+   window.VWO = window.VWO || [];
+   VWO.event =
+     VWO.event ||
+     function () {
+       VWO.push(["event"].concat([].slice.call(arguments)));
+     };
+ const currencyConvertor = (amount) => {
+     return amount * 88; // hard coded function!
+ }
+   VWO.event.addPreHook = function (preHookCallback) {
+     VWO.event.preHookList = VWO.event.preHookList || [];
+     VWO.event.preHookList.push(preHookCallback);
+   };
+   VWO.event.addPostHook = function (postHookCallback) {
+     VWO.event.postHookList = VWO.event.postHookList || [];
+     VWO.event.postHookList.push(postHookCallback);
+   };
+VWO.event.addPreHook((payload) => {
+     if (payload.d.event.name.includes("revenue") && payload.d.event?.props?.amount) {
+         console.log("converting currency!");
+         payload.d.event.props.amount = currencyConvertor(payload.d.event?.props?.amount);
+     }
+     return payload;
+ });
+   VWO.event.addPreHook((payload) => {
+     console.log("running the pre-hook! ", { ...payload });
+     // altering the payload!
+     payload.isLangSet =
+       window.language || document.cookie.indexOf("language") > -1;
+     return payload;
+   });
+   VWO.event.addPostHook(function (vwoEventPayload) {
+     console.log("running the post-hook! ", vwoEventPayload);
+     return vwoEventPayload;
+   });
+ }
+ if (window.location.search.indexOf("hooks=true") > -1) {
+   console.log("attaching hooks!");
+   attachHooks();
+ }
+
+    </script>
+    <script>
+      window.VWO = window.VWO || [];
+      VWO.event =
+        VWO.event ||
+        function () {
+          VWO.push(["event"].concat([].slice.call(arguments)));
+        };
+      VWO.event("testingEvent", {
+        prop1: "testing stuff!",
+      });
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-KG9D677");
+    </script>
+    <script type="text/javascript">
+      (function (nonVWOScriptsToExecute, VWO_HARD_TIMEOUT) {
+        window._vwo_evq = window._vwo_evq || [];
+        var queue = window._vwo_evq;
+        for (var i = 0; i < queue.length; i++) {
+          if (queue[i][0] === "rD") {
+            window.willRedirectionOccur = true;
+            break;
+          }
+        }
+        var _vwoOldPush = window._vwo_evq.push;
+        window._vwo_evq.push = function () {
+          var eventData = arguments[0],
+            willRedirectionOccur;
+          if (eventData[0] === "rD") {
+            willRedirectionOccur = eventData[1];
+            // It will be set to true if a redirection is going to be done by VWO.
+            window.willRedirectionOccurByVWO = willRedirectionOccur;
+          }
+          _vwoOldPush.apply(window._vwo_evq, [].slice.call(arguments));
+        };
+
+        var hardLimitTimedout = false;
+
+        function tryNonVWOTracking(nonVWOScriptsToExecute) {
+          if (
+            (window._vwo_code &&
+              (window._vwo_code.finished() || window._vwo_code.libExecuted)) ||
+            hardLimitTimedout
+          ) {
+            if (!window.willRedirectionOccurByVWO) {
+              clearTimeout(hardLimitTimer);
+              for (var i = 0; i < nonVWOScriptsToExecute.length; i++) {
+                try {
+                  nonVWOScriptsToExecute[i]();
+                } catch (e) {}
+              }
+              return;
+            }
+          }
+          setTimeout(function () {
+            tryNonVWOTracking(nonVWOScriptsToExecute);
+          }, 500);
+        }
+
+        var hardLimitTimer = setTimeout(function () {
+          hardLimitTimedout = true;
+        }, VWO_HARD_TIMEOUT);
+
+        tryNonVWOTracking(nonVWOScriptsToExecute);
+      })(
+        [
+          function () {
+            (function (i, s, o, g, r, a, m) {
+              console.log("Ran the GA script!");
+              return;
+              i["GoogleAnalyticsObject"] = r;
+              (i[r] =
+                i[r] ||
+                function () {
+                  (i[r].q = i[r].q || []).push(arguments);
+                }),
+                (i[r].l = 1 * new Date());
+              (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+              a.async = 1;
+              a.src = g;
+              m.parentNode.insertBefore(a, m);
+            })(
+              window,
+              document,
+              "script",
+              "https://www.google-analytics.com/analytics.js",
+              "ga"
+            );
+            ga("create", "UA-75286006-1", "auto"); //UA ID would vary as per UA account
+            ga("send", "pageview");
+          },
+        ],
+        5000 /*MAXIMUM TIME IN SECONDS IN WHICH GA CODE WILL EXECUTE ANYWAY*/
+      );
+    </script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+    />
+    <script>
+      VWO.event =
+        VWO.event ||
+        function () {
+          VWO.push(["event"].concat([].slice.call(arguments)));
+        };
+      VWO.event("event1", {
+        prop1: Math.abs(Math.random() * 100),
+      });
+    </script>
+    <script>
+      window.addEventListener("vwoInitComplete", (e) => {
+        console.log("VWO has successfully loaded! ", e);
+      });
+    </script>
+    <script>
+      VWO.visitor =
+        VWO.visitor ||
+        function () {
+          VWO.push(["visitor"].concat([].slice.call(arguments)));
+        };
+      VWO.visitor({
+        prop1: Math.abs(Math.random() * 100),
+      });
+    </script>
+    <script>
+      window.VWO.push([
+        "onVariationApplied",
+        (x) => {
+          console.log("vAppl: ", x);
+        },
+      ]);
+    </script>
+    <script>
+      window.VWO.push([
+        "onEventReceive",
+        (d) => {
+          console.log("onEvR: ", d);
+        },
+      ]);
+    </script>
+    <!-- Start VWO Async SmartCode -->
+    <script type="text/javascript" id="vwoCode">
+      // window._vwo_server_url="https://dacdn.visualwebsiteoptimizer.com/";
+      window._vwo_code =
+        window._vwo_code ||
+        (function () {
+          var account_id = 644092,
+            version = 1.4,
+            settings_tolerance = 2000,
+            library_tolerance = 2500,
+            use_existing_jquery = false,
+            is_spa = 1,
+            hide_element = "",
+            /* DO NOT EDIT BELOW THIS LINE */
+            f = false,
+            d = document,
+            vwoCodeEl = document.querySelector("#vwoCode"),
+            code = {
+              use_existing_jquery: function () {
+                return use_existing_jquery;
+              },
+              library_tolerance: function () {
+                return library_tolerance;
+              },
+              finish: function () {
+                if (!f) {
+                  f = true;
+                  var e = d.getElementById("_vis_opt_path_hides");
+                  if (e) e.parentNode.removeChild(e);
+                }
+              },
+              finished: function () {
+                return f;
+              },
+              load: function (e) {
+                var t = d.createElement("script");
+                t.fetchPriority = "high";
+                t.src = e;
+                t.type = "text/javascript";
+                t.innerText;
+                t.onerror = function () {
+                  _vwo_code.finish();
+                };
+                d.getElementsByTagName("head")[0].appendChild(t);
+              },
+              getVersion: function () {
+                return version;
+              },
+              getMatchedCookies: function (e) {
+                var t = [];
+                if (document.cookie) {
+                  t = document.cookie.match(e) || [];
+                }
+                return t;
+              },
+              getCombinationCookie: function () {
+                var e = code.getMatchedCookies(
+                  /(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi
+                );
+                e = e.map(function (e) {
+                  try {
+                    var t = decodeURIComponent(e);
+                    if (!/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(t)) {
+                      return "";
+                    }
+                    return t;
+                  } catch (e) {
+                    return "";
+                  }
+                });
+                var i = [];
+                e.forEach(function (e) {
+                  var t = e.match(/([\d,]+)/g);
+                  t && i.push(t.join("-"));
+                });
+                return i.join("|");
+              },
+              init: function () {
+                window.settings_timer = setTimeout(function () {
+                  _vwo_code.finish();
+                }, settings_tolerance);
+                var e = d.createElement("style"),
+                  t = hide_element
+                    ? hide_element +
+                      "{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}"
+                    : "",
+                  i = d.getElementsByTagName("head")[0];
+                e.setAttribute("id", "_vis_opt_path_hides");
+                vwoCodeEl && e.setAttribute("nonce", vwoCodeEl.nonce);
+                e.setAttribute("type", "text/css");
+                if (!location.href.includes("doNotHide=true")) {
+                  if (e.styleSheet) e.styleSheet.cssText = t;
+                  else e.appendChild(d.createTextNode(t));
+                  i.appendChild(e);
+                }
+                var n = this.getCombinationCookie();
+                this.load(
+                  "https://dev.visualwebsiteoptimizer.com/j.php?a=" +
+                    account_id +
+                    "&u=" +
+                    encodeURIComponent(d.URL) +
+                    "&f=" +
+                    +is_spa +
+                    "&vn=" +
+                    version +
+                    (n ? "&c=" + n : "")
+                );
+                return settings_timer;
+              },
+            };
+          window._vwo_settings_timer = code.init();
+          return code;
+        })();
+    </script>
+    <!-- End VWO Async SmartCode -->
+    <!-- <script>
+      const observer = new MutationObserver((data) => {
+        data.forEach((obj) => {
+          console.log("=> ", obj.addedNodes[0], ' ', obj.addedNodes[0]?.innerHTML);
+          if (obj.addedNodes[0]?.tagName == "BODY") {
+            // observer.observe(obj.addedNodes[0], { childList: true });
+          }
+        });
+      });
+      const sel = document.querySelector('html');
+      console.log("## ", document.body);
+      observer.observe(sel, { childList: true, subtree: true });
+    </script> -->
+    <style>
+      body,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Lato", sans-serif;
+      }
+
+      .w3-bar,
+      h1,
+      button {
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .fa-anchor,
+      .fa-coffee {
+        font-size: 200px;
+      }
+      #link1 {
+        cursor: default;
+      }
+      #link1:hover {
+        background: yellow;
+      }
+    </style>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+      }
+
+      .carousel {
+        background: #eee;
+      }
+
+      .carousel-cell {
+        width: 28%;
+        height: 200px;
+        margin-right: 10px;
+        background: #8c8;
+        border-radius: 5px;
+        counter-increment: carousel-cell;
+      }
+
+      .carousel-cell.is-selected {
+        background: #ed2;
+      }
+
+      /* cell number */
+      .carousel-cell:before {
+        display: block;
+        text-align: center;
+        content: counter(carousel-cell);
+        line-height: 200px;
+        font-size: 80px;
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KG9D677"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navbar -->
+    <div class="w3-top">
+      <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+        <a
+          class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red"
+          href="javascript:void(0);"
+          onclick="myFunction()"
+          title="Toggle Navigation Menu"
+          ><i class="fa fa-bars"></i
+        ></a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white"
+          >Home</a
+        >
+        <a
+          href="/Testing-Site/index.html"
+          class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+          >Index.html</a
+        >
+        <a
+          href="/Testing-Site/testing.html"
+          class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+          >Testing.html</a
+        >
+        <a
+          href="#"
+          class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+          onclick="history.pushState(null, 'test', 'index.html')"
+          >SPA PUSH</a
+        >
+        <a
+          href="#"
+          class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+          >Link 4</a
+        >
+      </div>
+
+      <!-- Navbar on small screens -->
+      <div
+        id="navDemo"
+        class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large"
+      >
+        <a
+          href="/Testing-Site/index.html"
+          class="w3-bar-item w3-button w3-padding-large"
+          >Index.html</a
+        >
+        <a
+          href="/Testing-Site/testing.html"
+          class="w3-bar-item w3-button w3-padding-large"
+          >Testing.html</a
+        >
+        <a
+          href="#"
+          class="w3-bar-item w3-button w3-padding-large"
+          onclick="history.pushState(null, 'test', 'index.html')"
+          >SPA PUSH</a
+        >
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="w3-container w3-red w3-center" style="padding: 128px 16px">
+      <h1 class="w3-margin w3-jumbo">START PAGE</h1>
+      <p class="w3-xlarge">Template by w3.css</p>
+      <button
+        class="w3-button w3-black w3-padding-large w3-large w3-margin-top"
+      >
+        Get Started
+      </button>
+      <h1>
+        <a href="/lorem4.html" id="link1">LOREM4</a>
+      </h1>
+    </header>
+
+    <!-- First Grid -->
+    <div class="w3-row-padding w3-padding-64 w3-container">
+      <div class="w3-content">
+        <div class="w3-twothird">
+          <h1>Lorem Ipsum</h1>
+          <h5 class="w3-padding-32">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </h5>
+
+          <p class="w3-text-grey">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat
+            non proident, sunt in culpa qui officia deserunt mollit anim id est
+            laborum consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
+          </p>
+        </div>
+
+        <div class="w3-third w3-center">
+          <i class="fa fa-anchor w3-padding-64 w3-text-red"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Grid -->
+    <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+      <div class="w3-content">
+        <div class="w3-third w3-center">
+          <i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i>
+        </div>
+
+        <div class="w3-twothird">
+          <h1>Lorem Ipsum</h1>
+          <h5 class="w3-padding-32">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </h5>
+
+          <p class="w3-text-grey">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat
+            non proident, sunt in culpa qui officia deserunt mollit anim id est
+            laborum consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+      <h1 class="w3-margin w3-xlarge">Quote of the day: live life</h1>
+    </div>
+
+    <div class="w3-testing">
+      <img
+        src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        alt="$"
+      />
+    </div>
+
+    <div id="flickity-container">
+      <h1>Flickity - groupCells</h1>
+      <!-- Flickity HTML init -->
+      <div class="carousel" data-flickity='{ "groupCells": true }'>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+        <div class="carousel-cell"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-64 w3-center w3-opacity">
+      <div class="w3-xlarge w3-padding-32">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+      </div>
+      <p>
+        Powered by
+        <a href="https://www.w3schools.com/w3css/default.asp" target="_blank"
+          >w3.css</a
+        >
+      </p>
+    </footer>
+
+    <script>
+      // Used to toggle the menu on small screens when clicking on the menu button
+      function myFunction() {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+        } else {
+          x.className = x.className.replace(" w3-show", "");
+        }
+      }
+      if (window.location.href.includes("?debugger=true")) {
+        const textArea = document.createElement("textarea");
+        textArea.style.height = "400px";
+        textArea.style.width = "400px";
+        textArea.style.overflow = "scroll";
+        textArea.style.position = "fixed";
+        textArea.style.top = "60%";
+        const log = (value) => {
+          textArea.value = textArea.value + " - " + value;
+        };
+        log(JSON.stringify(window.chrome));
+        document
+          .querySelector("body > header > button")
+          .addEventListener("pointerdown", () => log("pointerdown"));
+        document
+          .querySelector("body > header > button")
+          .addEventListener("pointerup", () => log("pointerup"));
+        // document.querySelector("body > header > button").addEventListener("pointermove", () => log("pointermove"));
+        document.body.appendChild(textArea);
+      }
+    </script>
+  </body>
+</html>
