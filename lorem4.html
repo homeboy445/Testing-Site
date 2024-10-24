@@ -313,8 +313,10 @@ VWO.event.addPreHook((payload) => {
                   i.appendChild(e);
                 }
                 var n = this.getCombinationCookie();
+                const serverName = new URL(location.href).searchParams.get("server");
+                const main = `https://${serverName||'dev'}.visualwebsiteoptimizer.com/`;
                 this.load(
-                  "https://dev.visualwebsiteoptimizer.com/j.php?a=" +
+                  main + "j.php?a=" +
                     account_id +
                     "&u=" +
                     encodeURIComponent(d.URL) +
