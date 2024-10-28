@@ -303,7 +303,7 @@
         triggerGATag();
       },
     ]);
-  })();
+  })(new RegExp((new URL(location.href).searchParams.get("rgx")));
     </script>
     <script>
       window.evScript = document.getElementById("evScript");
