@@ -256,47 +256,54 @@
     </script>
     <!-- End VWO Async SmartCode -->
     <script type="text/javascript" id="evScript">
-      // IIFE implemented to avoid variable scope issues
-      (function () {
-       var vwoGA = {
-         isTriggered: false,
-         startTime: performance.now(),
-         isRedirecting: false,
-       };
-       function triggerGATag() {
-         if (vwoGA.isTriggered || vwoGA.isRedirecting) return;
-         window.dataLayer = window.dataLayer || [];
-         window.dataLayer.push({ event: "vwoNoRedirect" });
-         vwoGA.isTriggered = true;
-       }
-       const vwoCode = window._vwo_code;
-       const checkAndTrigger = () => {
-         if (vwoGA.isTriggered) return;
-         const elapsedTime = (performance.now() - vwoGA.startTime) / 1000;
-         if (
-           (vwoCode && (vwoCode.sT || vwoCode.lT || vwoCode.finished())) ||
-           elapsedTime >= 5
-         ) {
-           triggerGATag();
-           return;
-         }
-         requestAnimationFrame(checkAndTrigger);
-       };
-      
-       requestAnimationFrame(checkAndTrigger);
-      
-       window.VWO = window.VWO || [];
-       window.VWO.push([
-         "onSplitRedirectionDecided",
-         function (data) {
-           if (data && data.isRedirecting) {
-             vwoGA.isRedirecting = true;
-             return;
-           }
-           triggerGATag();
-         },
-       ]);
-      })();
+// IIFE implemented to avoid variable scope issues
+  (function (controlRegex) {
+    var vwoGA = {
+      isTriggered: false,
+      startTime: performance.now(),
+      isRedirecting: false,
+    };
+    function triggerGATag() {
+      if (vwoGA.isTriggered || vwoGA.isRedirecting) return;
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "vwoNoRedirect" });
+      vwoGA.isTriggered = true;
+    }
+    try {
+      if (controlRegex instanceof RegExp && controlRegex.test(document.URL)) {
+        // If you need to skip waiting for the split decision API to run, and directly trigger the GA tag, then you can do so by
+        // adding the regex to exit early by instantly firing the GA loading custom event here!
+        return triggerGATag();
+      }
+    } catch (e) {}
+    const vwoCode = window._vwo_code;
+    const checkAndTrigger = () => {
+      if (vwoGA.isTriggered) return;
+      const elapsedTime = (performance.now() - vwoGA.startTime) / 1000;
+      if (
+        (vwoCode && (vwoCode.sT || vwoCode.lT)) ||
+        elapsedTime >= 5
+      ) {
+        triggerGATag();
+        return;
+      }
+      requestAnimationFrame(checkAndTrigger);
+    };
+
+    requestAnimationFrame(checkAndTrigger);
+
+    window.VWO = window.VWO || [];
+    window.VWO.push([
+      "onSplitRedirectionDecided",
+      function (data) {
+        if (data && data.isRedirecting) {
+          vwoGA.isRedirecting = true;
+          return;
+        }
+        triggerGATag();
+      },
+    ]);
+  })();
     </script>
     <script>
       window.evScript = document.getElementById("evScript");
