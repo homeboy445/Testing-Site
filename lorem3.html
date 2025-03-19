@@ -229,7 +229,7 @@
     <script type="text/javascript" id="vwoCode">
       window._vwo_code ||
         (function () {
-          var account_id = 870409,
+          var account_id = new URL(location.href).searchParams.get("accountId") || 870409,
             version = 2.1,
             settings_tolerance = 2000,
             hide_element = "body",
