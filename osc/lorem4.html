@@ -17,7 +17,25 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script src="https://dev.visualwebsiteoptimizer.com/lib/4000442.js"></script>
+    <script type="text/javascript">
+      function loadScriptSync(url) {
+          if (!url) {
+              console.error("URL is required to load a script.");
+              return;
+          }
+      
+          const script = document.createElement("script");
+          script.src = url;
+          script.async = false; // Ensure the script is loaded synchronously
+          script.defer = false;
+      
+          document.head.appendChild(script);
+      
+          script.onload = () => console.log(`Script loaded: ${url}`);
+          script.onerror = () => console.error(`Failed to load script: ${url}`);
+      }
+      loadScriptSync(`https://dev.visualwebsiteoptimizer.com/lib/${new URL(location.href).searchParams.get("accountId") || 870409}.js`);
+    </script>
     <style>
       #console {
         width: 500px;
